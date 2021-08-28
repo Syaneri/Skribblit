@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PostGame"
+    android:background="#DB57C0">
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/panel_background"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"
+        android:paddingBottom="20dp">
+
+        <TextView
+            android:id="@+id/tv_post_game"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GAME OVER"
+            android:textStyle="bold"
+            android:textSize="30dp"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="20dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_Code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rankings"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/tv_lobby"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="5dp"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_playerList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_Code"
+            app:layout_constraintBottom_toTopOf="@id/btn_lobby_start"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginTop="20dp"
+            />
+
+        <Button
+            android:id="@+id/btn_lobby_start"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Play again"
+            android:textSize="13dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:background="@drawable/button_background"
+            />
+
+        <Button
+            android:id="@+id/btn_lobby_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Exit Lobby"
+            android:textSize="13dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:background="@drawable/button_background"
+            />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
