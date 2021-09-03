@@ -7,11 +7,11 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     tools:context=".Lobby"
-    android:background="#DB57C0">
+    android:background="@drawable/gradient_bg">
 
     <LinearLayout
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_width="375dp"
+        android:layout_height="600dp"
         android:orientation="vertical"
         android:background="@drawable/panel_background"
         app:layout_constraintTop_toTopOf="parent"
@@ -59,9 +59,9 @@
             android:layout_marginTop="20dp"
             />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_lobby_start"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="40dp"
             android:text="Start Game"
             android:textSize="13dp"
@@ -70,9 +70,9 @@
             android:background="@drawable/button_background"
             />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_lobby_exit"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="40dp"
             android:text="Exit Lobby"
             android:textSize="13dp"
