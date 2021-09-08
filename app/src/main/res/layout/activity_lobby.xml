@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    tools:context=".Lobby"
+    tools:context=".LobbyActivity"
     android:background="@drawable/gradient_bg">
 
     <LinearLayout
@@ -24,7 +24,7 @@
             android:id="@+id/tv_lobby"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="LOBBY"
+            android:text="LIST OF LOBBIES"
             android:textStyle="bold"
             android:textSize="30dp"
             android:gravity="center"
@@ -33,21 +33,8 @@
             android:layout_marginTop="20dp"
             />
 
-        <TextView
-            android:id="@+id/tv_Code"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Code"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:gravity="center"
-            app:layout_constraintTop_toBottomOf="@id/tv_lobby"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="5dp"
-            />
-
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_playerList"
+            android:id="@+id/rv_lobbyList"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             app:layout_constraintStart_toStartOf="parent"

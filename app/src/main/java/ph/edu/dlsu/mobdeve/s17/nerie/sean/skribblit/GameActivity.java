@@ -3,6 +3,7 @@ package ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -20,7 +21,7 @@ import android.widget.ImageView;
 
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.databinding.ActivityGameBinding;
 
-public class Game extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener {
+public class GameActivity extends AppCompatActivity implements View.OnTouchListener {
     private ActivityGameBinding binding;
     private ImageView iv_canvas;
     private Button btn_palette;
@@ -46,8 +47,7 @@ public class Game extends AppCompatActivity implements View.OnTouchListener, Vie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityGameBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        setContentView(view);
+        setContentView(binding.getRoot());
 
         iv_canvas = (ImageView) findViewById(R.id.iv_canvas);
 
@@ -85,10 +85,12 @@ public class Game extends AppCompatActivity implements View.OnTouchListener, Vie
         paint.setStyle(Paint.Style.STROKE);
         iv_canvas.setImageBitmap(bitmap);
         iv_canvas.setOnTouchListener(this);
-    }
 
-    @Override
-    public void onClick(View v) {
+        //change to next word
+        binding.btnNext.setOnClickListener(view -> {
+            Intent gotoPostGame = new Intent(GameActivity.this, PostGameActivity.class);
+            startActivity(gotoPostGame);
+        });
 
     }
 

@@ -1,53 +1,43 @@
 package ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit;
 
-import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity{
 
     private ActivityMainBinding binding;
+    int images[] = {R.drawable.mark_face_angry, R.drawable.mark_face_ase, R.drawable.mark_face_cry,
+            R.drawable.mark_face_hehe, R.drawable.mark_face_jito, R.drawable.mark_face_laugh,
+            R.drawable.mark_face_smile, R.drawable.mark_face_tere};
+    ImageView userImage;
+    int i = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        setContentView(view);
+        setContentView(binding.getRoot());
 
-        binding.btnEnter.setOnClickListener(this);
-        binding.btnCreate.setOnClickListener(this);
-        binding.btnSwitchPic.setOnClickListener(this);
+        userImage = (ImageView) findViewById(R.id.iv_display_pic);
+
+        binding.btnEnter.setOnClickListener(view -> {
+            Intent gotoLobby = new Intent(MainActivity.this, LobbyActivity.class);
+            startActivity(gotoLobby);
+        });
+
+        binding.btnSwitchPic.setOnClickListener(view -> {
+            userImage.setImageResource(images[i]);
+            i++;
+            if (i == 8)
+                i = 0;
+        });
     }
 
-    @Override
-    public void onClick(View v) {
-        String message = "";
-        switch (v.getId()){
-            case R.id.btn_enter:
-                if(binding.etCode.getText().toString().equals("1234")) {
-                    message = "Lobby entered";
-                    Intent gotoLobby = new Intent(MainActivity.this, Lobby.class);
-                    startActivity(gotoLobby);
-                } else {
-                    message = "Lobby not found";
-                }
-                break;
-            case R.id.btn_create:
-                message = "Lobby Created";
-                break;
-            case R.id.btn_switch_pic:
-                message = "Not yet implemented :(";
-                break;
-        }
-
-        Toast.makeText(getApplicationContext(),
-            message,
-                Toast.LENGTH_SHORT).show();
-    }
 }
