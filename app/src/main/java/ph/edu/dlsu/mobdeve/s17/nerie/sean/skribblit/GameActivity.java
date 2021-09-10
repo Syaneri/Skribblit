@@ -87,7 +87,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         iv_canvas.setOnTouchListener(this);
 
         //change to next word
-        binding.btnNext.setOnClickListener(view -> {
+        binding.btnNext.setOnClickListener(view ->{
             Intent gotoPostGame = new Intent(GameActivity.this, PostGameActivity.class);
             startActivity(gotoPostGame);
         });

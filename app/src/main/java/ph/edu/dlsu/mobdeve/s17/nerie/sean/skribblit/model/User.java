@@ -4,10 +4,14 @@ public class User {
 
     private int userImageId;
     private String name;
+    private int id;
+    private int highscore;
 
-    public User(int userImageId, String name){
+    public User(int userImageId, String name, int id, int highscore){
         this.userImageId = userImageId;
         this.name = name;
+        this.id = id;
+        this.highscore = highscore;
     }
 
     public int getUserImageId() {
@@ -24,5 +28,21 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getHighscore() {
+        return highscore;
+    }
+
+    public void setHighscore(int highscore) {
+        this.highscore = highscore;
     }
 }
