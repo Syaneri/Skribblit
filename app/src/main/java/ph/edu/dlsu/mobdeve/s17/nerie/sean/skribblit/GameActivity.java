@@ -24,11 +24,15 @@ import org.w3c.dom.Text;
 
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.databinding.ActivityGameBinding;
 
-public class GameActivity extends AppCompatActivity implements View.OnTouchListener {
+public class GameActivity extends AppCompatActivity implements View.OnClickListener {
     private ActivityGameBinding binding;
+
     private ImageView iv_canvas;
     private TextView tv_word;
     private Button btn_palette;
+
+    private TouchEventView drawing_pad;
+
 
     private Bitmap bitmap;
     private Canvas canvas;
@@ -36,16 +40,8 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
     private float windowWidth;
     private float windowHeight;
 
-
-    private float downX = 0.0f;
-    private float downY = 0.0f;
-    private float upX = 0.0f;
-    private float upY = 0.0f;
-
     private Bitmap alteredImage;
     private Matrix matrix;
-
-    private int penColor = Color.BLUE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,15 +49,19 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         binding = ActivityGameBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
         iv_canvas = (ImageView) findViewById(R.id.iv_canvas);
         tv_word = (TextView) findViewById(R.id.tv_word);
 
         String str = tv_word.getText().toString();
 
+        init();
+
+
         DisplayMetrics currentDisplay = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(currentDisplay);
-        windowHeight = currentDisplay.heightPixels * 5;
-        windowWidth = currentDisplay.widthPixels * 5;
+        windowHeight = currentDisplay.heightPixels * 2;
+        windowWidth = currentDisplay.widthPixels * 2;
 
         WindowManager windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         final Display display2 = windowManager.getDefaultDisplay();
@@ -87,51 +87,23 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         canvas = new Canvas(bitmap);
         paint = new Paint();
 
-        paint.setColor(penColor);
-        paint.setStrokeWidth(10);
-        paint.setStyle(Paint.Style.STROKE);
-        iv_canvas.setImageBitmap(bitmap);
-        iv_canvas.setOnTouchListener(this);
-
         //change to next word
         binding.btnNext.setOnClickListener(view ->{
             Intent gotoSaveGame = new Intent(GameActivity.this, PostGameActivity.class);
             //gotoSaveGame.putExtra("name_key", "Hello");
             startActivity(gotoSaveGame);
+
             finish();
         });
 
     }
 
+    private void init(){
+        drawing_pad = (TouchEventView) findViewById(R.id.iv_canvas);
+    }
+
     @Override
-    public boolean onTouch(View v, MotionEvent motionEvent) {
-        int action = motionEvent.getAction();
+    public void onClick(View v) {
 
-        switch(action){
-            case MotionEvent.ACTION_DOWN:
-                downX = motionEvent.getX();
-                downY = motionEvent.getY();
-                break;
-            case MotionEvent.ACTION_UP:
-                upX = motionEvent.getX();
-                upY = motionEvent.getY();
-                canvas.drawLine(downX, downY, upX, upY, paint);
-                iv_canvas.invalidate();
-                break;
-            case MotionEvent.ACTION_MOVE:
-                upX = motionEvent.getX();
-                upY = motionEvent.getY();
-                canvas.drawLine(downX, downY, upX, upY, paint);
-                iv_canvas.invalidate();
-                downX = upX;
-                downY = upY;
-                break;
-            case MotionEvent.ACTION_CANCEL:
-                break;
-            default:
-                break;
-        }
-
-        return true;
     }
 }
