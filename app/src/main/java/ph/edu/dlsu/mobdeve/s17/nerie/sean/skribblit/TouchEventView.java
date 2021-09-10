@@ -8,6 +8,7 @@ import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Toast;
 
 public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView {
@@ -71,6 +72,41 @@ public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView
         gestureDetector.onTouchEvent(event);
         invalidate();
         return true;
+    }
+
+    public void changeColor(View v){
+        switch(v.getId()){
+            case R.id.btn_blackcolor:
+                paint.setColor(Color.BLACK);
+                break;
+            case R.id.btn_graycolor:
+                paint.setColor(Color.DKGRAY);
+                break;
+            case R.id.btn_redcolor:
+                paint.setColor(Color.RED);
+                break;
+            case R.id.btn_yellowcolor:
+                paint.setColor(Color.YELLOW);
+                break;
+            case R.id.btn_bluecolor:
+                paint.setColor(Color.BLUE);
+                break;
+            case R.id.btn_greencolor:
+                paint.setColor(Color.GREEN);
+                break;
+            case R.id.btn_pinkcolor:
+
+                break;
+            case R.id.btn_orangecolor:
+
+                break;
+            case R.id.btn_browncolor:
+
+                break;
+            case R.id.btn_whitecolor:
+                paint.setColor(Color.WHITE);
+                break;
+        }
     }
 }
 
