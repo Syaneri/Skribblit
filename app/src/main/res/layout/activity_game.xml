@@ -73,7 +73,7 @@
             android:textSize="30dp"
             android:textStyle="bold" />
 
-        <ImageView
+        <ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.TouchEventView
             android:id="@+id/iv_canvas"
             android:layout_width="match_parent"
             android:layout_height="0dp"
