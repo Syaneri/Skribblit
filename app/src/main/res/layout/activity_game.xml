@@ -49,21 +49,24 @@
     </LinearLayout>
     <LinearLayout
         android:id="@+id/canvas_panel"
-        android:layout_width="375dp"
-        android:layout_height="500dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@drawable/panel_background"
         app:layout_constraintTop_toBottomOf="@id/top_panel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="140dp"
         android:weightSum="12">
 
         <TextView
             android:id="@+id/tv_word"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:gravity="center"
             android:text="Robot"
             android:textColor="@color/black"
@@ -86,8 +89,7 @@
             android:textSize="13dp"
             android:layout_marginTop="10dp"
             android:layout_gravity="center"
-            android:background="@drawable/button_background"
-            />
+            android:background="@drawable/button_background" />
     </LinearLayout>
 
     <LinearLayout
@@ -98,7 +100,8 @@
         app:layout_constraintTop_toBottomOf="@+id/canvas_panel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="60dp"
         android:weightSum="12">
 
         <LinearLayout
@@ -255,8 +258,5 @@
                 android:layout_marginLeft="10dp"
                 android:layout_gravity="center"/>
         </LinearLayout>
-
-
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

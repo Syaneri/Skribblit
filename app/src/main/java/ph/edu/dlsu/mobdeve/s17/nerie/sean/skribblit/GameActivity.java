@@ -53,8 +53,8 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
 
         DisplayMetrics currentDisplay = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(currentDisplay);
-        windowHeight = currentDisplay.heightPixels * 2;
-        windowWidth = currentDisplay.widthPixels * 2;
+        windowHeight = currentDisplay.heightPixels * 5;
+        windowWidth = currentDisplay.widthPixels * 5;
 
         WindowManager windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         final Display display2 = windowManager.getDefaultDisplay();
