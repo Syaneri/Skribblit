@@ -13,7 +13,7 @@ import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.adapters.LobbyAdapter;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.databinding.ActivityLobbyBinding;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.model.Lobby;
 
-public class LobbyActivity extends AppCompatActivity implements View.OnClickListener {
+public class LobbyActivity extends AppCompatActivity {
 
     private LobbyAdapter lobbyAdapter;
     private ActivityLobbyBinding binding;
@@ -32,24 +32,17 @@ public class LobbyActivity extends AppCompatActivity implements View.OnClickList
         binding.rvLobbyList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         binding.rvLobbyList.setAdapter(lobbyAdapter);
 
-        binding.btnLobbyStart.setOnClickListener(this);
-        binding.btnLobbyExit.setOnClickListener(this);
+        binding.btnLobbyStart.setOnClickListener(view -> {
+            Intent gameStart = new Intent(LobbyActivity.this, GameActivity.class);
+            startActivity(gameStart);
+            finish();
+        });
+        binding.btnLobbyExit.setOnClickListener(view -> {
+            finish();
+        });
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case(R.id.btn_lobby_start):
-                Intent gameStart = new Intent(LobbyActivity.this, GameActivity.class);
-                startActivity(gameStart);
-                finish();
-                break;
-            case(R.id.btn_lobby_exit):
-                finish();
-                break;
-        }
-    }
-
+    //temporary data
     private ArrayList<Lobby> populateLobby(){
         ArrayList<Lobby> lobbyList = new ArrayList<>();
         String[] words1 = {"dog", "cat", "lion", "tiger", "crocodile", "shark", "whale", "snake", "bear", "wolf"};
