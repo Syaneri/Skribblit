@@ -37,12 +37,11 @@ public class LobbyAdapter extends RecyclerView.Adapter<LobbyAdapter.LobbyViewHol
 
     @Override
     public void onBindViewHolder(LobbyAdapter.LobbyViewHolder holder, int position) {
-        holder.tv_lobbyname.setText(lobbyArrayList.get(position).getId() + "");
+        holder.tv_lobbyname.setText(lobbyArrayList.get(position).getName() + "");
     }
 
     protected class LobbyViewHolder extends RecyclerView.ViewHolder {
         TextView tv_lobbyname;
-
 
         public LobbyViewHolder(View view){
             super(view);
