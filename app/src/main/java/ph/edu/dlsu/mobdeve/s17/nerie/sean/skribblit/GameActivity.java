@@ -18,12 +18,21 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.databinding.ActivityGameBinding;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
     private ActivityGameBinding binding;
+
+    private ImageView iv_canvas;
+    private TextView tv_word;
+    private Button btn_palette;
+
     private TouchEventView drawing_pad;
+
 
     private Bitmap bitmap;
     private Canvas canvas;
@@ -40,7 +49,14 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         binding = ActivityGameBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
+        iv_canvas = (ImageView) findViewById(R.id.iv_canvas);
+        tv_word = (TextView) findViewById(R.id.tv_word);
+
+        String str = tv_word.getText().toString();
+
         init();
+
 
         DisplayMetrics currentDisplay = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(currentDisplay);
@@ -73,8 +89,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         //change to next word
         binding.btnNext.setOnClickListener(view ->{
-            Intent gotoPostGame = new Intent(GameActivity.this, PostGameActivity.class);
-            startActivity(gotoPostGame);
+            Intent gotoSaveGame = new Intent(GameActivity.this, PostGameActivity.class);
+            //gotoSaveGame.putExtra("name_key", "Hello");
+            startActivity(gotoSaveGame);
+
             finish();
         });
 

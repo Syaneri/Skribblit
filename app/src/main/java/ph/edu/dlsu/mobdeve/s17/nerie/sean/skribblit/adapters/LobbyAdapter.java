@@ -43,7 +43,6 @@ public class LobbyAdapter extends RecyclerView.Adapter<LobbyAdapter.LobbyViewHol
     protected class LobbyViewHolder extends RecyclerView.ViewHolder {
         TextView tv_lobbyname;
 
-
         public LobbyViewHolder(View view){
             super(view);
 

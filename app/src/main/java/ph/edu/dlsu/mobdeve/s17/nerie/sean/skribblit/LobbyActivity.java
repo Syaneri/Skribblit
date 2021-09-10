@@ -37,6 +37,7 @@ public class LobbyActivity extends AppCompatActivity {
             startActivity(gameStart);
             finish();
         });
+
         binding.btnLobbyExit.setOnClickListener(view -> {
             finish();
         });
