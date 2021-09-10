@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,17 +38,19 @@ public class LobbyAdapter extends RecyclerView.Adapter<LobbyAdapter.LobbyViewHol
 
     @Override
     public void onBindViewHolder(LobbyAdapter.LobbyViewHolder holder, int position) {
-        holder.tv_lobbyname.setText(lobbyArrayList.get(position).getId() + "");
+        holder.tv_lobbyname.setText(lobbyArrayList.get(position).getName() + "");
+        holder.iv_pic.setImageResource(lobbyArrayList.get(position).getId());
     }
 
     protected class LobbyViewHolder extends RecyclerView.ViewHolder {
         TextView tv_lobbyname;
-
+        ImageView iv_pic;
 
         public LobbyViewHolder(View view){
             super(view);
 
             tv_lobbyname = view.findViewById(R.id.tv_lobbyname);
+            iv_pic = view.findViewById(R.id.iv_lobbypic);
         }
     }
 }

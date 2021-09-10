@@ -24,7 +24,7 @@
             android:id="@+id/tv_lobby"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="LIST OF LOBBIES"
+            android:text="LIST OF PLAYERS"
             android:textStyle="bold"
             android:textSize="30dp"
             android:gravity="center"

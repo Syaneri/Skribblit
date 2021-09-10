@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.databinding.ActivityGameBinding;
 
@@ -43,12 +44,20 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
 
     private int penColor = Color.BLUE;
 
+    TextView tv_player;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityGameBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        Intent intent = getIntent();
+        String str = intent.getStringExtra("name_key");
+
+        tv_player = (TextView) findViewById(R.id.tv_player_turn);
+
+        tv_player.setText(str + "'s Turn");
         iv_canvas = (ImageView) findViewById(R.id.iv_canvas);
 
         DisplayMetrics currentDisplay = new DisplayMetrics();

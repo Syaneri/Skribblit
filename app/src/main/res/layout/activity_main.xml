@@ -67,6 +67,21 @@
             android:textColor="@color/black"
             android:textColorHint="@color/black" />
 
+        <EditText
+            android:id="@+id/et_code"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="70dp"
+            android:background="@drawable/textbox"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Invite Code"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_enter"
             android:layout_width="150dp"
@@ -74,7 +89,17 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:background="@drawable/button_background"
-            android:text="Join a Lobby"
+            android:text="Enter Lobby"
+            android:textSize="13dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_create"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_background"
+            android:text="Create Lobby"
             android:textSize="13dp" />
 
     </LinearLayout>
