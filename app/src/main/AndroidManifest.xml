@@ -11,6 +11,7 @@
         android:theme="@style/Theme.Skribblit">
         <activity android:name=".GameActivity" />
         <activity android:name=".PostGameActivity" />
+        <activity android:name=".SaveGameActivity"/>
         <activity android:name=".LobbyActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

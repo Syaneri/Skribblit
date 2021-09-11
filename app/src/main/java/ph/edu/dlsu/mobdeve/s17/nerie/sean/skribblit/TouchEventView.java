@@ -6,10 +6,13 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
+import android.util.Pair;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView {
     private Paint paint = new Paint();
@@ -24,7 +27,7 @@ public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView
         this.context = context;
 
         paint.setAntiAlias(true);
-        paint.setStrokeWidth(6f);
+        paint.setStrokeWidth(10f);
         paint.setColor(Color.BLACK);
 
         paint.setStyle(Paint.Style.STROKE);
@@ -74,39 +77,52 @@ public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView
         return true;
     }
 
-    public void changeColor(View v){
-        switch(v.getId()){
-            case R.id.btn_blackcolor:
-                paint.setColor(Color.BLACK);
+    public void changeColor(String str){
+        switch(str){
+            case "black":
+                paint.setColor(context.getColor(R.color.black));
                 break;
-            case R.id.btn_graycolor:
-                paint.setColor(Color.DKGRAY);
+            case "gray":
+                paint.setColor(context.getColor(R.color.gray));
                 break;
-            case R.id.btn_redcolor:
-                paint.setColor(Color.RED);
+            case "red":
+                paint.setColor(context.getColor(R.color.red));
                 break;
-            case R.id.btn_yellowcolor:
-                paint.setColor(Color.YELLOW);
+            case "yellow":
+                paint.setColor(context.getColor(R.color.yellow));
                 break;
-            case R.id.btn_bluecolor:
-                paint.setColor(Color.BLUE);
+            case "blue":
+                invalidate();
+                paint.setColor(context.getColor(R.color.blue));
                 break;
-            case R.id.btn_greencolor:
-                paint.setColor(Color.GREEN);
+            case "green":
+                paint.setColor(context.getColor(R.color.green));
                 break;
-            case R.id.btn_pinkcolor:
-
+            case "pink":
+                paint.setColor(context.getColor(R.color.pink));
                 break;
-            case R.id.btn_orangecolor:
-
+            case "orange":
+                paint.setColor(context.getColor(R.color.orange));
                 break;
-            case R.id.btn_browncolor:
-
+            case "brown":
+                paint.setColor(context.getColor(R.color.brown));
                 break;
-            case R.id.btn_whitecolor:
-                paint.setColor(Color.WHITE);
+            case "white":
+                paint.setColor(context.getColor(R.color.white));
                 break;
         }
+    }
+
+    public void changeStroke(String str){
+        switch(str){
+            case "normal":
+                paint.setStrokeWidth(10f);
+                break;
+            case "thin":
+                paint.setStrokeWidth(6f);
+                break;
+            case "thick":
+                paint.setStrokeWidth(15f);
     }
 }
 
