@@ -7,6 +7,7 @@ public class Lobby {
     private int id;
     private String name;
     private String[] words;
+    private boolean selected;
 
     public Lobby(int id, String name, String[] words) {
         this.id = id;
@@ -36,5 +37,13 @@ public class Lobby {
 
     public void setWords(String[] words) {
         this.words = words;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 }
