@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.util.Pair;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -122,8 +123,6 @@ public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView
                 break;
             case "thick":
                 paint.setStrokeWidth(15f);
-                break;
-        }
     }
 }
 

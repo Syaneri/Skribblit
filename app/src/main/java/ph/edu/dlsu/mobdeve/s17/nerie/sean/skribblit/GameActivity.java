@@ -166,5 +166,5 @@ public class GameActivity extends AppCompatActivity{
     private void init(){
         drawing_pad = (TouchEventView) findViewById(R.id.iv_canvas);
     }
-    
+
 }
