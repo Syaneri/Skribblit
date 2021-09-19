@@ -113,8 +113,8 @@ public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView
         }
     }
 
-    public void changeStroke(String str) {
-        switch (str) {
+    public void changeStroke(String str){
+        switch(str) {
             case "normal":
                 paint.setStrokeWidth(10f);
                 break;
