@@ -33,17 +33,16 @@ public class PostGameActivity extends AppCompatActivity {
         binding.rvPlayerList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         binding.rvPlayerList.setAdapter(userAdapter);
 
-        binding.btnLobbyStart.setOnClickListener(view -> {
+        binding.btnNewGame.setOnClickListener(view -> {
             Intent gameStart = new Intent(PostGameActivity.this, MainActivity.class);
             startActivity(gameStart);
             finish();
         });
 
-        binding.btnLobbyExit.setOnClickListener(view -> {
+        binding.btnExitGame.setOnClickListener(view -> {
             finish();
             System.exit(0);
         });
-
 
     }
 

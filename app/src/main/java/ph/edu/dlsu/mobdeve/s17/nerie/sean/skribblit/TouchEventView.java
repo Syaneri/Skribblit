@@ -77,8 +77,8 @@ public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView
         return true;
     }
 
-    public void changeColor(String str){
-        switch(str){
+    public void changeColor(String str) {
+        switch (str) {
             case "black":
                 paint.setColor(context.getColor(R.color.black));
                 break;
