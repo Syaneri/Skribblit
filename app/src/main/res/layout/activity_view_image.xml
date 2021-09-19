@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewImageActivity"
+    android:background="@drawable/gradient_bg">
+
+    <LinearLayout
+        android:id="@+id/top_panel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:weightSum="5"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_display_drawing"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_save_image"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:text="Save Image"
+            android:textSize="13dp"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/button_background" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_back"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:text="Back"
+            android:textSize="13dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:background="@drawable/button_background" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

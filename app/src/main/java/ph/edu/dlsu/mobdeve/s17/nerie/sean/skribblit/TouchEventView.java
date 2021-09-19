@@ -77,8 +77,8 @@ public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView
         return true;
     }
 
-    public void changeColor(String str){
-        switch(str){
+    public void changeColor(String str) {
+        switch (str) {
             case "black":
                 paint.setColor(context.getColor(R.color.black));
                 break;
@@ -113,8 +113,8 @@ public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView
         }
     }
 
-    public void changeStroke(String str){
-        switch(str){
+    public void changeStroke(String str) {
+        switch (str) {
             case "normal":
                 paint.setStrokeWidth(10f);
                 break;
@@ -123,6 +123,7 @@ public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView
                 break;
             case "thick":
                 paint.setStrokeWidth(15f);
+        }
     }
 }
 
