@@ -14,6 +14,10 @@ public class User {
         this.highscore = highscore;
     }
 
+    public User(){
+
+    }
+
     public int getUserImageId() {
         return userImageId;
     }

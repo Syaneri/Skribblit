@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.adapters.LobbyAdapter;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.adapters.UserAdapter;
+import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.dao.UserDAO;
+import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.dao.UserDAOSQLImpl;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.databinding.ActivityLobbyBinding;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.databinding.ActivityPostGameBinding;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.model.Lobby;
@@ -27,11 +29,13 @@ public class PostGameActivity extends AppCompatActivity {
         binding = ActivityPostGameBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        userArrayList = populateUser();
-        userAdapter = new UserAdapter(getApplicationContext(), userArrayList);
+//        populateUser();
+//        userAdapter = new UserAdapter(getApplicationContext(), userArrayList);
+//
+//        binding.rvPlayerList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+//        binding.rvPlayerList.setAdapter(userAdapter);
 
-        binding.rvPlayerList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        binding.rvPlayerList.setAdapter(userAdapter);
+        initDAO();
 
         binding.btnNewGame.setOnClickListener(view -> {
             Intent gameStart = new Intent(PostGameActivity.this, MainActivity.class);
@@ -46,25 +50,56 @@ public class PostGameActivity extends AppCompatActivity {
 
     }
 
-    private ArrayList<User> populateUser(){
+    private void initDAO(){
+        UserDAO userDAO = new UserDAOSQLImpl(getApplicationContext());
+        userAdapter = new UserAdapter(getApplicationContext(), userDAO.getUsers());
+
+        binding.rvPlayerList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+        binding.rvPlayerList.setAdapter(userAdapter);
+
+        //save user using intent
+    }
+
+    private void populateUser() {
         ArrayList<User> userList = new ArrayList<>();
+        User user = new User();
 
-        userList.add(new User(
-                R.drawable.mark_face_laugh,
-                "Sean",
-                1,
-                1234
+        UserDAO userDAO = new UserDAOSQLImpl(getApplicationContext());
 
-        ));
+        user.setId(1);
+        user.setName("Sean");
+        user.setUserImageId(R.drawable.mark_face_hehe);
+        user.setHighscore(1234);
 
-        userList.add(new User(
-                R.drawable.mark_face_cry,
-                "Robi",
-                2,
-                1231
+        userDAO.addUser(user);
 
-        ));
+        user.setId(2);
+        user.setName("Robi");
+        user.setUserImageId(R.drawable.mark_face_cry);
+        user.setHighscore(1231);
 
-        return userList;
+        userDAO.addUser(user);
+
+
+//        userList.add(new User(
+//                R.drawable.mark_face_laugh,
+//                "Sean",
+//                1,
+//                1234
+//
+//        ));
+//
+//        userList.add(new User(
+//                R.drawable.mark_face_cry,
+//                "Robi",
+//                2,
+//                1231
+//
+//        ));
+//
+//        this.userArrayList = userList;
+//
+//        return userList;
     }
 }
