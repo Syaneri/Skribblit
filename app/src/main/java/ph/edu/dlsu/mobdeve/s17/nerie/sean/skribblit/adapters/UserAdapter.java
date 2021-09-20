@@ -26,6 +26,23 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         this.userArrayList = userArrayList;
         this.context = context;
     }
+    public void addUsers(ArrayList<User> usersArrayList) {
+        this.userArrayList.clear();
+        this.userArrayList.addAll(usersArrayList);
+        notifyDataSetChanged();
+    }
+
+    public void addUser(User user) {
+        userArrayList.add(0, user);
+        notifyItemInserted(0);
+        notifyDataSetChanged();
+    }
+
+    public void removeUser(int position) {
+        userArrayList.remove(position);
+        notifyItemRemoved(position);
+        notifyDataSetChanged();
+    }
 
     public UserAdapter.UserViewHolder onCreateViewHolder (ViewGroup parent, int viewType){
         View view = LayoutInflater.from(parent.getContext())
@@ -42,16 +59,19 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     public void onBindViewHolder(UserAdapter.UserViewHolder holder, int position) {
         holder.tv_user_highscore.setText(userArrayList.get(position).getName() + "");
         holder.tv_score.setText(userArrayList.get(position).getHighscore() + "");
+        holder.iv_dp.setImageResource(userArrayList.get(position).getUserImageId());
     }
 
     protected class UserViewHolder extends RecyclerView.ViewHolder {
         TextView tv_user_highscore;
         TextView tv_score;
+        ImageView iv_dp;
 
         public UserViewHolder(View view){
             super(view);
             tv_score = view.findViewById(R.id.tv_score);
             tv_user_highscore = view.findViewById(R.id.tv_user_highscore);
+            iv_dp = view.findViewById(R.id.iv_dp);
         }
     }
 }
