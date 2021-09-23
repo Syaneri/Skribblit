@@ -47,6 +47,9 @@ public class GameActivity extends AppCompatActivity{
     private Bitmap alteredImage;
     private Matrix matrix;
 
+    private String currentColor;
+    private String currentWidth;
+
     private ArrayList<Pair<Path, Paint>> paths = new ArrayList<Pair<Path, Paint>>();
 
     @Override
@@ -60,9 +63,6 @@ public class GameActivity extends AppCompatActivity{
         tv_word = (TextView) findViewById(R.id.tv_word);
 
         String str = tv_word.getText().toString();
-
-        init();
-
 
         DisplayMetrics currentDisplay = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(currentDisplay);
@@ -90,6 +90,8 @@ public class GameActivity extends AppCompatActivity{
                 (height),
                 Bitmap.Config.ARGB_8888);
 
+        init();
+
         canvas = new Canvas(bitmap);
         paint = new Paint();
 
@@ -105,67 +107,93 @@ public class GameActivity extends AppCompatActivity{
         //change colors
         binding.btnBlackcolor.setOnClickListener(view -> {
             this.drawing_pad.changeColor("black");
+            currentColor = this.drawing_pad.getCurrentColor();
         });
 
         binding.btnBrowncolor.setOnClickListener(view -> {
             this.drawing_pad.changeColor("brown");
+            currentColor = this.drawing_pad.getCurrentColor();
         });
 
         binding.btnBluecolor.setOnClickListener(view ->{
             this.drawing_pad.changeColor("blue");
+            currentColor = this.drawing_pad.getCurrentColor();
         });
 
         binding.btnGraycolor.setOnClickListener(view ->{
             this.drawing_pad.changeColor("gray");
+            currentColor = this.drawing_pad.getCurrentColor();
         });
 
         binding.btnGreencolor.setOnClickListener(view ->{
             this.drawing_pad.changeColor("green");
+            currentColor = this.drawing_pad.getCurrentColor();
         });
 
         binding.btnBlackcolor.setOnClickListener(view ->{
             this.drawing_pad.changeColor("black");
+            currentColor = this.drawing_pad.getCurrentColor();
         });
 
         binding.btnOrangecolor.setOnClickListener(view ->{
             this.drawing_pad.changeColor("orange");
+            currentColor = this.drawing_pad.getCurrentColor();
         });
 
         binding.btnPinkcolor.setOnClickListener(view ->{
             this.drawing_pad.changeColor("pink");
+            currentColor = this.drawing_pad.getCurrentColor();
         });
 
         binding.btnRedcolor.setOnClickListener(view ->{
             this.drawing_pad.changeColor("red");
+            currentColor = this.drawing_pad.getCurrentColor();
         });
 
         binding.btnWhitecolor.setOnClickListener(view ->{
             this.drawing_pad.changeColor("white");
+            currentColor = this.drawing_pad.getCurrentColor();
         });
 
         binding.btnYellowcolor.setOnClickListener(view ->{
             this.drawing_pad.changeColor("yellow");
+            currentColor = this.drawing_pad.getCurrentColor();
         });
 
         //change stroke sizes
 
         binding.btnThickbrush.setOnClickListener(view -> {
             this.drawing_pad.changeStroke("thick");
+            currentWidth = this.drawing_pad.getCurrentWidth();
         });
 
         binding.btnThinbrush.setOnClickListener(view -> {
             this.drawing_pad.changeStroke("thin");
+            currentWidth = this.drawing_pad.getCurrentWidth();
         });
 
         binding.btnNormalbrush.setOnClickListener(view -> {
             this.drawing_pad.changeStroke("normal");
+            currentWidth = this.drawing_pad.getCurrentWidth();
+        });
+
+        binding.btnBrush.setOnClickListener(view -> {
+            this.drawing_pad.changeStroke(currentColor);
+            this.drawing_pad.changeColor(currentWidth);
+        });
+
+        binding.btnEraser.setOnClickListener(view -> {
+            this.drawing_pad.changeStroke("thick");
+            this.drawing_pad.changeColor("white");
         });
 
     }
 
     private void init(){
         drawing_pad = (TouchEventView) findViewById(R.id.iv_canvas);
-        drawing_pad.init();
+        currentWidth = "normal";
+        currentColor = "black";
+        drawing_pad.init(bitmap);
     }
 
 }

@@ -2,6 +2,7 @@ package ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -16,8 +17,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView {
-    private Paint paint = new Paint();
-    private Path path = new Path();
+    private Paint paint;
+    private Path path;
     private float mX, mY;
     private ArrayList<Stroke> paths = new ArrayList<>();
     private String currentColor;
@@ -44,8 +45,10 @@ public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView
         super(context, attrs);
         gestureDetector = new GestureDetector(context, new GestureListener());
         this.context = context;
+        paint = new Paint();
 
         paint.setAntiAlias(true);
+        paint.setDither(true);
         paint.setStrokeWidth(10f);
         paint.setColor(Color.BLACK);
 
@@ -53,7 +56,9 @@ public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView
         paint.setStrokeJoin(Paint.Join.ROUND);
     }
 
-    public void init(){
+    public void init(Bitmap bitmap){
+        nBitmap = bitmap;
+        nCanvas = new Canvas(nBitmap);
         currentColor = "black";
         currentWidth = "normal";
     }
@@ -82,9 +87,10 @@ public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView
         for (Stroke fp : paths) {
             changeColor(fp.color);
             changeStroke(fp.width);
-            canvas.drawPath(path, paint);
+            nCanvas.drawPath(path, paint);
         }
-//        canvas.restore();
+        canvas.drawBitmap(nBitmap, 0, 0, mBitmapPaint);
+        canvas.restore();
     }
 
     private void touchStart(float x, float y){
@@ -178,14 +184,21 @@ public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView
     public void changeStroke(String str){
         switch(str) {
             case "normal":
-                paint.setStrokeWidth(10f);
+                currentWidth = "normal";
+                paint.setStrokeWidth(30);
                 break;
             case "thin":
-                paint.setStrokeWidth(6f);
+                currentWidth = "thin";
+                paint.setStrokeWidth(10);
                 break;
             case "thick":
-                paint.setStrokeWidth(15f);
+                currentWidth = "thick";
+                paint.setStrokeWidth(50);
         }
     }
+
+    public String getCurrentColor() { return currentColor; }
+
+    public String getCurrentWidth() { return currentWidth; }
 }
 
