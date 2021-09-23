@@ -107,57 +107,57 @@ public class GameActivity extends AppCompatActivity{
         //change colors
         binding.btnBlackcolor.setOnClickListener(view -> {
             this.drawing_pad.changeColor("black");
-            currentColor = this.drawing_pad.getCurrentColor();
+            colorSelected();
         });
 
         binding.btnBrowncolor.setOnClickListener(view -> {
             this.drawing_pad.changeColor("brown");
-            currentColor = this.drawing_pad.getCurrentColor();
+            colorSelected();
         });
 
         binding.btnBluecolor.setOnClickListener(view ->{
             this.drawing_pad.changeColor("blue");
-            currentColor = this.drawing_pad.getCurrentColor();
+            colorSelected();
         });
 
         binding.btnGraycolor.setOnClickListener(view ->{
             this.drawing_pad.changeColor("gray");
-            currentColor = this.drawing_pad.getCurrentColor();
+            colorSelected();
         });
 
         binding.btnGreencolor.setOnClickListener(view ->{
             this.drawing_pad.changeColor("green");
-            currentColor = this.drawing_pad.getCurrentColor();
+            colorSelected();
         });
 
         binding.btnBlackcolor.setOnClickListener(view ->{
             this.drawing_pad.changeColor("black");
-            currentColor = this.drawing_pad.getCurrentColor();
+            colorSelected();
         });
 
         binding.btnOrangecolor.setOnClickListener(view ->{
             this.drawing_pad.changeColor("orange");
-            currentColor = this.drawing_pad.getCurrentColor();
+            colorSelected();
         });
 
         binding.btnPinkcolor.setOnClickListener(view ->{
             this.drawing_pad.changeColor("pink");
-            currentColor = this.drawing_pad.getCurrentColor();
+            colorSelected();
         });
 
         binding.btnRedcolor.setOnClickListener(view ->{
             this.drawing_pad.changeColor("red");
-            currentColor = this.drawing_pad.getCurrentColor();
+            colorSelected();
         });
 
         binding.btnWhitecolor.setOnClickListener(view ->{
             this.drawing_pad.changeColor("white");
-            currentColor = this.drawing_pad.getCurrentColor();
+            colorSelected();
         });
 
         binding.btnYellowcolor.setOnClickListener(view ->{
             this.drawing_pad.changeColor("yellow");
-            currentColor = this.drawing_pad.getCurrentColor();
+            colorSelected();
         });
 
         //change stroke sizes
@@ -178,15 +178,26 @@ public class GameActivity extends AppCompatActivity{
         });
 
         binding.btnBrush.setOnClickListener(view -> {
-            this.drawing_pad.changeStroke(currentColor);
-            this.drawing_pad.changeColor(currentWidth);
+            canvas.drawColor(Color.WHITE);
+            this.drawing_pad.changeColor("white");
+            this.drawing_pad.changeStroke("thick");
+            binding.btnBrush.setBackgroundResource(R.drawable.brush_selected);
         });
 
         binding.btnEraser.setOnClickListener(view -> {
             this.drawing_pad.changeStroke("thick");
             this.drawing_pad.changeColor("white");
+            binding.btnEraser.setBackgroundResource(R.drawable.eraser_selected);
+            binding.btnBrush.setBackgroundResource(R.drawable.brush_notselected);
         });
 
+    }
+
+    private void colorSelected(){
+        this.drawing_pad.changeStroke(currentWidth);
+        this.currentColor = this.drawing_pad.getCurrentColor();
+        binding.btnEraser.setBackgroundResource(R.drawable.eraser_notselected);
+        binding.btnBrush.setBackgroundResource(R.drawable.brush_notselected);
     }
 
     private void init(){

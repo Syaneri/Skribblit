@@ -54,6 +54,7 @@ public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView
 
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeJoin(Paint.Join.ROUND);
+        paint.setStrokeJoin(Paint.Join.ROUND);
     }
 
     public void init(Bitmap bitmap){
@@ -61,6 +62,10 @@ public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView
         nCanvas = new Canvas(nBitmap);
         currentColor = "black";
         currentWidth = "normal";
+    }
+
+    public Bitmap save() {
+        return nBitmap;
     }
 
 
@@ -80,14 +85,12 @@ public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.save();
-
-//        int backgroundColor = Color.WHITE;
-//        nCanvas.drawColor(backgroundColor);
+//        nCanvas.drawColor(Color.WHITE);
 
         for (Stroke fp : paths) {
             changeColor(fp.color);
             changeStroke(fp.width);
-            nCanvas.drawPath(path, paint);
+            nCanvas.drawPath(fp.path, paint);
         }
         canvas.drawBitmap(nBitmap, 0, 0, mBitmapPaint);
         canvas.restore();
@@ -185,7 +188,7 @@ public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView
         switch(str) {
             case "normal":
                 currentWidth = "normal";
-                paint.setStrokeWidth(30);
+                paint.setStrokeWidth(20);
                 break;
             case "thin":
                 currentWidth = "thin";
@@ -193,7 +196,7 @@ public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView
                 break;
             case "thick":
                 currentWidth = "thick";
-                paint.setStrokeWidth(50);
+                paint.setStrokeWidth(30);
         }
     }
 

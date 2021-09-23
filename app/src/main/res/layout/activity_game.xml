@@ -243,6 +243,14 @@
             >
 
             <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btn_eraser"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/eraser_notselected"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"/>
+
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/btn_brush"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
@@ -250,13 +258,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_gravity="center"/>
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/btn_eraser"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:background="@drawable/eraser_notselected"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center"/>
+
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
