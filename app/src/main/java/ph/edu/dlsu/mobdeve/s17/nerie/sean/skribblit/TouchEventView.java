@@ -1,6 +1,7 @@
 package ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -17,9 +18,27 @@ import java.util.ArrayList;
 public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView {
     private Paint paint = new Paint();
     private Path path = new Path();
+    private float mX, mY;
+    private ArrayList<Stroke> paths = new ArrayList<>();
+    private String currentColor;
+    private String currentWidth;
+    private Canvas nCanvas;
+    private Bitmap nBitmap;
+    private Paint mBitmapPaint = new Paint(Paint.DITHER_FLAG);
     Context context;
 
     GestureDetector gestureDetector;
+
+    public class Stroke{
+        public String color;
+        public String width;
+        public Path path;
+        public Stroke(String color, String width, Path path){
+            this.color = color;
+            this.width = width;
+            this.path = path;
+        }
+    }
 
     public TouchEventView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -32,6 +51,11 @@ public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView
 
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeJoin(Paint.Join.ROUND);
+    }
+
+    public void init(){
+        currentColor = "black";
+        currentWidth = "normal";
     }
 
 
@@ -50,8 +74,34 @@ public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawPath(path, paint);
+        canvas.save();
+
+//        int backgroundColor = Color.WHITE;
+//        nCanvas.drawColor(backgroundColor);
+
+        for (Stroke fp : paths) {
+            changeColor(fp.color);
+            changeStroke(fp.width);
+            canvas.drawPath(path, paint);
+        }
+//        canvas.restore();
     }
+
+    private void touchStart(float x, float y){
+        path = new Path();
+        Stroke fp = new Stroke(currentColor, currentWidth, path);
+        paths.add(fp);
+
+        path.reset();
+        path.moveTo(x, y);
+
+        mX = x;
+        mY = y;
+    }
+
+//    private void touchUp() {
+//        path.lineTo(mX, mY);
+//    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -60,13 +110,16 @@ public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                path.moveTo(eventX, eventY);
+                touchStart(eventX, eventY);
+                invalidate();
                 return true;
             case MotionEvent.ACTION_MOVE:
                 path.lineTo(eventX, eventY);
+                invalidate();
                 break;
             case MotionEvent.ACTION_UP:
-
+//                touchUp();
+                invalidate();
                 break;
             default:
                 return false;
@@ -80,34 +133,43 @@ public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView
     public void changeColor(String str) {
         switch (str) {
             case "black":
+                currentColor = "black";
                 paint.setColor(context.getColor(R.color.black));
                 break;
             case "gray":
+                currentColor = "gray";
                 paint.setColor(context.getColor(R.color.gray));
                 break;
             case "red":
+                currentColor = "red";
                 paint.setColor(context.getColor(R.color.red));
                 break;
             case "yellow":
+                currentColor = "yellow";
                 paint.setColor(context.getColor(R.color.yellow));
                 break;
             case "blue":
-                invalidate();
+                currentColor = "blue";
                 paint.setColor(context.getColor(R.color.blue));
                 break;
             case "green":
+                currentColor = "green";
                 paint.setColor(context.getColor(R.color.green));
                 break;
             case "pink":
+                currentColor = "pink";
                 paint.setColor(context.getColor(R.color.pink));
                 break;
             case "orange":
+                currentColor = "orange";
                 paint.setColor(context.getColor(R.color.orange));
                 break;
             case "brown":
+                currentColor = "brown";
                 paint.setColor(context.getColor(R.color.brown));
                 break;
             case "white":
+                currentColor = "white";
                 paint.setColor(context.getColor(R.color.white));
                 break;
         }
