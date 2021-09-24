@@ -28,12 +28,19 @@ public class MainActivity extends AppCompatActivity{
         userImage = (ImageView) findViewById(R.id.iv_display_pic);
 
         binding.btnEnter.setOnClickListener(view -> {
-            Intent gotoLobby = new Intent(MainActivity.this, LobbyActivity.class);
+            if(!binding.etName.getText().toString().equals("")){
+                Intent gotoLobby = new Intent(MainActivity.this, LobbyActivity.class);
 
-            gotoLobby.putExtra("name", binding.etName.getText().toString());
-            gotoLobby.putExtra("dp", this.dp);
+                gotoLobby.putExtra("name", binding.etName.getText().toString());
+                gotoLobby.putExtra("dp", this.dp);
 
-            startActivity(gotoLobby);
+                startActivity(gotoLobby);
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "No name entered.",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+            }
         });
 
         binding.btnSwitchPic.setOnClickListener(view -> {

@@ -67,7 +67,6 @@ public class SaveGameActivity extends AppCompatActivity {
         ArrayList<Drawing> drawingList = new ArrayList<>();
 
         drawingList.add(new Drawing(
-                1234,
                 str,
                 bmp
         ));
