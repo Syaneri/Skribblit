@@ -246,6 +246,7 @@ public class GameActivity extends AppCompatActivity{
             //gotoSaveGame.putExtra("canvas", bitmap);
 
             gotoSaveGame.putExtra("drawings", drawings);
+            gotoSaveGame.putExtra("score", score);
 //            Bitmap temp = bitmap;
 //
 //            ByteArrayOutputStream stream = new ByteArrayOutputStream();
