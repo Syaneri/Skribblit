@@ -47,8 +47,8 @@ public class LobbyActivity extends AppCompatActivity {
                 if(lobby.isSelected()){
                     lobbySelected = true;
                     Intent gameStart = new Intent(LobbyActivity.this, GameActivity.class);
-                    gameStart.putExtra("name", this.name);
-                    gameStart.putExtra("dp", this.dp);
+                    gameStart.putExtra("name", name);
+                    gameStart.putExtra("dp", dp);
                     gameStart.putExtra("lobby", lobby);
                     startActivity(gameStart);
                     finish();

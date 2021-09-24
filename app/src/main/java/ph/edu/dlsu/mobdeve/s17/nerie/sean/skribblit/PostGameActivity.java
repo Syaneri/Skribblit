@@ -33,12 +33,10 @@ public class PostGameActivity extends AppCompatActivity {
         binding = ActivityPostGameBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        Intent intent = getIntent();
-
-        this.name = intent.getStringExtra("name");
-        this.lobby = intent.getStringExtra("lobby");
-        this.dp = intent.getIntExtra("dp", 0);
-        this.score = intent.getIntExtra("score", 0);
+        this.name = getIntent().getStringExtra("name");
+        this.lobby = getIntent().getStringExtra("lobby");
+        this.dp = getIntent().getIntExtra("dp", 0);
+        this.score = getIntent().getIntExtra("score", 0);
 
         //create user
 //        saveUser(this.name, this.dp, this.score, this.lobby);
