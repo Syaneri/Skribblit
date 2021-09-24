@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class LobbyActivity extends AppCompatActivity {
 
         String name = getIntent().getStringExtra("name");
         int dp = getIntent().getIntExtra("dp", 0);
+        Log.d("Counter", "dp: " + dp);
 
         lobbyList = populateLobby();
         lobbySelected = false;

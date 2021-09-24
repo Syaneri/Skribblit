@@ -34,7 +34,7 @@
             android:layout_height="40dp"
             android:text="Save Image"
             android:textSize="13dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:layout_gravity="center"
             android:background="@drawable/button_background" />
         <androidx.appcompat.widget.AppCompatButton

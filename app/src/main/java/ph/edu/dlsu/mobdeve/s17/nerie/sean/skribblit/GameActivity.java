@@ -109,6 +109,7 @@ public class GameActivity extends AppCompatActivity{
             height = outPoint.x;
             width = outPoint.y;
         }
+        height = height/2;
 
         bitmap = Bitmap.createBitmap(width,
                 (height),

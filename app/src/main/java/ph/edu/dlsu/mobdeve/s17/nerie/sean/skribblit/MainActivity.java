@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity{
         setContentView(binding.getRoot());
 
         userImage = (ImageView) findViewById(R.id.iv_display_pic);
+        dp = images[0];
 
         binding.btnEnter.setOnClickListener(view -> {
             if(!binding.etName.getText().toString().equals("")){
