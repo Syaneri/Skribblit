@@ -39,6 +39,8 @@ public class SaveGameActivity extends AppCompatActivity {
 
         binding.rvDrawingList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         binding.rvDrawingList.setAdapter(saveGameAdapter);
+        
+        binding.userScore.setText("Score: ");
 
         binding.btnViewHighScores.setOnClickListener(view -> {
             Intent endGame = new Intent(SaveGameActivity.this, PostGameActivity.class);
