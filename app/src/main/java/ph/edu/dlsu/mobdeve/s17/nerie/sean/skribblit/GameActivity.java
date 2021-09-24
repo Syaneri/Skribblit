@@ -134,10 +134,10 @@ public class GameActivity extends AppCompatActivity{
         canvas.drawColor(Color.WHITE);
 
         //change to next word
-        if (wordCount == 4)
-            binding.btnNext.setText("Finish");
 
         binding.btnNext.setOnClickListener(view ->{
+            if (wordCount == 3)
+                binding.btnNext.setText("Finish");
             saveDrawing();
         });
 
@@ -247,6 +247,7 @@ public class GameActivity extends AppCompatActivity{
             counter = 90;
             timer.start();
         } else{
+            timer.cancel();
             score += counter;
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
