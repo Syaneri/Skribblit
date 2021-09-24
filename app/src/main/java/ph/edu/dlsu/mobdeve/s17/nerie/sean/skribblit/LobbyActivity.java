@@ -22,15 +22,18 @@ public class LobbyActivity extends AppCompatActivity {
 
     ArrayList<Lobby> lobbyList;
 
+    private String name;
+    private Lobby lobby;
+    private int dp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityLobbyBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        Intent intent = new Intent();
-        String name = intent.getStringExtra("name");
-        int dp = intent.getIntExtra("dp", 0);
+        String name = getIntent().getStringExtra("name");
+        int dp = getIntent().getIntExtra("dp", 0);
 
         lobbyList = populateLobby();
         lobbySelected = false;
@@ -44,8 +47,8 @@ public class LobbyActivity extends AppCompatActivity {
                 if(lobby.isSelected()){
                     lobbySelected = true;
                     Intent gameStart = new Intent(LobbyActivity.this, GameActivity.class);
-                    gameStart.putExtra("name", name);
-                    gameStart.putExtra("dp", dp);
+                    gameStart.putExtra("name", this.name);
+                    gameStart.putExtra("dp", this.dp);
                     gameStart.putExtra("lobby", lobby);
                     startActivity(gameStart);
                     finish();

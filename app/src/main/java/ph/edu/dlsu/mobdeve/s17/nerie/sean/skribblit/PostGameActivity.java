@@ -33,7 +33,7 @@ public class PostGameActivity extends AppCompatActivity {
         binding = ActivityPostGameBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        Intent intent = new Intent();
+        Intent intent = getIntent();
 
         this.name = intent.getStringExtra("name");
         this.lobby = intent.getStringExtra("lobby");
@@ -41,7 +41,7 @@ public class PostGameActivity extends AppCompatActivity {
         this.score = intent.getIntExtra("score", 0);
 
         //create user
-        saveUser(this.name, this.dp, this.score, this.lobby);
+//        saveUser(this.name, this.dp, this.score, this.lobby);
 
 //        populateUser();
 
@@ -56,6 +56,14 @@ public class PostGameActivity extends AppCompatActivity {
 
     private void initDAO(){
         UserDAO userDAO = new UserDAOSQLImpl(getApplicationContext());
+
+        User user = new User();
+        user.setId(userDAO.getSize() + 1);
+        user.setName(this.name);
+        user.setUserImageId(this.dp);
+        user.setHighscore(this.score);
+        user.setLobby(this.lobby);
+        userDAO.addUser(user);
 
         ArrayList<User> userArrayList = new ArrayList<>();
         userArrayList = userDAO.getUsers();
@@ -90,19 +98,6 @@ public class PostGameActivity extends AppCompatActivity {
 
 
         //save user using intent
-    }
-
-    private void saveUser(String name, int imageId, int highscore, String lobby){
-        User user = new User();
-
-        UserDAO userDAO = new UserDAOSQLImpl(getApplicationContext());
-
-        user.setId(userDAO.getSize() + 1);
-        user.setName(name);
-        user.setUserImageId(imageId);
-        user.setHighscore(highscore);
-        user.setLobby(lobby);
-        userDAO.addUser(user);
     }
 
 //    private void populateUser() {
