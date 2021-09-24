@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.GameActivity;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.LobbyActivity;
@@ -25,6 +27,7 @@ import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.SaveGameActivity;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.ViewImageActivity;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.databinding.ActivityPostGameBinding;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.model.Drawing;
+import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.model.User;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
@@ -36,6 +39,7 @@ public class SaveGameAdapter extends RecyclerView.Adapter<SaveGameAdapter.SaveGa
     public SaveGameAdapter(Context context, ArrayList<Drawing> drawingsArrayList){
         this.drawingsArrayList = drawingsArrayList;
         this.context = context;
+
     }
 
     @Override

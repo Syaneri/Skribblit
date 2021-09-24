@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.adapters.LobbyAdapter;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.adapters.UserAdapter;
@@ -29,6 +31,8 @@ public class PostGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityPostGameBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+//        populateUser();
 
 //        populateUser();
 //        userAdapter = new UserAdapter(getApplicationContext(), userArrayList);
@@ -53,7 +57,22 @@ public class PostGameActivity extends AppCompatActivity {
 
     private void initDAO(){
         UserDAO userDAO = new UserDAOSQLImpl(getApplicationContext());
-        userAdapter = new UserAdapter(getApplicationContext(), userDAO.getUsers());
+
+        ArrayList<User> userArrayList = new ArrayList<>();
+        userArrayList = userDAO.getUsers();
+
+        Collections.sort(userArrayList, new Comparator<User>() {
+            @Override
+            public int compare(User u1, User u2) {
+                if (u1.getHighscore() < u2.getHighscore())
+                    return 1;
+                if (u1.getHighscore() > u2.getHighscore())
+                    return -1;
+                return 0;
+            }
+        });
+
+        userAdapter = new UserAdapter(getApplicationContext(), userArrayList);
 
         binding.rvPlayerList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
@@ -63,24 +82,24 @@ public class PostGameActivity extends AppCompatActivity {
     }
 
     private void populateUser() {
-        ArrayList<User> userList = new ArrayList<>();
+//        ArrayList<User> userList = new ArrayList<>();
         User user = new User();
 
         UserDAO userDAO = new UserDAOSQLImpl(getApplicationContext());
 
-        user.setId(1);
+        user.setId(3);
         user.setName("Sean");
         user.setUserImageId(R.drawable.mark_face_hehe);
-        user.setHighscore(1234);
+        user.setHighscore(1250);
 
         userDAO.addUser(user);
 
-        user.setId(2);
-        user.setName("Robi");
-        user.setUserImageId(R.drawable.mark_face_cry);
-        user.setHighscore(1231);
-
-        userDAO.addUser(user);
+//        user.setId(2);
+//        user.setName("Robi");
+//        user.setUserImageId(R.drawable.mark_face_cry);
+//        user.setHighscore(1231);
+//
+//        userDAO.addUser(user);
 
 
 //        userList.add(new User(
