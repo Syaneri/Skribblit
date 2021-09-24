@@ -15,6 +15,7 @@ import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.dao.UserDAO;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.dao.UserDAOSQLImpl;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.databinding.ActivitySaveGameBinding;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.model.Drawing;
+import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.model.Lobby;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.model.User;
 
 import static android.graphics.BitmapFactory.decodeByteArray;
@@ -24,53 +25,59 @@ public class SaveGameActivity extends AppCompatActivity {
     private ArrayList<Drawing> drawingList;
     private SaveGameAdapter saveGameAdapter;
 
+    private String name;
+    private String lobby;
+    private int dp;
+    private int score;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySaveGameBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        byte[] byteArray = getIntent().getByteArrayExtra("canvas");
-        Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+        //get data from gameactivity
+        Intent intent = getIntent();
 
-        drawingList = populateDrawings("Robot", bmp);
+        this.name = getIntent().getStringExtra("name");
+        this.dp = getIntent().getIntExtra("dp", 0);
+        this.lobby = getIntent().getStringExtra("lobby");
+        this.score = getIntent().getIntExtra("score", 0);
 
-        saveGameAdapter = new SaveGameAdapter(getApplicationContext(), drawingList);
+        ArrayList<Drawing> drawings = (ArrayList<Drawing>)intent.getSerializableExtra("drawings");
+
+        //send data to savegameadapter
+        saveGameAdapter = new SaveGameAdapter(getApplicationContext(), drawings);
 
         binding.rvDrawingList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         binding.rvDrawingList.setAdapter(saveGameAdapter);
         
-        binding.userScore.setText("Score: ");
+        binding.userScore.setText("Score: " + score);
 
         binding.btnViewHighScores.setOnClickListener(view -> {
             Intent endGame = new Intent(SaveGameActivity.this, PostGameActivity.class);
+
+            endGame.putExtra("lobby", this.lobby);
+            endGame.putExtra("score", this.score);
+            endGame.putExtra("name", this.name);
+            endGame.putExtra("dp", this.dp);
+
             startActivity(endGame);
             finish();
         });
 
     }
 
-    private void saveUser(String name, int imageId, int highscore){
-        User user = new User();
 
-        UserDAO userDAO = new UserDAOSQLImpl(getApplicationContext());
-
-        user.setId(userDAO.getSize() + 1);
-        user.setName(name);
-        user.setUserImageId(imageId);
-        user.setHighscore(highscore);
-        userDAO.addUser(user);
-    }
-
-    //temporary data
-    private ArrayList<Drawing> populateDrawings(String str, Bitmap bmp){
-        ArrayList<Drawing> drawingList = new ArrayList<>();
-
-        drawingList.add(new Drawing(
-                str,
-                bmp
-        ));
-
-        return drawingList;
-    }
+//    //temporary data
+//    private ArrayList<Drawing> populateDrawings(String str, Bitmap bmp){
+//        ArrayList<Drawing> drawingList = new ArrayList<>();
+//
+//        drawingList.add(new Drawing(
+//                str,
+//                bmp
+//        ));
+//
+//        return drawingList;
+//    }
 }

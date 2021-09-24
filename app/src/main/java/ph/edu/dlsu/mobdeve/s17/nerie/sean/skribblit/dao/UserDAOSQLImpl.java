@@ -28,6 +28,7 @@ public class UserDAOSQLImpl implements UserDAO {
         values.put(UserDatabase.USERS_NAME, user.getName());
         values.put(UserDatabase.USERS_DP, user.getUserImageId());
         values.put(UserDatabase.USERS_SCORE, user.getHighscore());
+        values.put(UserDatabase.USERS_LOBBY, user.getLobby());
 
         database = userdatabase.getWritableDatabase();
 
@@ -47,7 +48,8 @@ public class UserDAOSQLImpl implements UserDAO {
         String[] columns = {UserDatabase.USERS_ID,
                 UserDatabase.USERS_NAME,
                 UserDatabase.USERS_DP,
-                UserDatabase.USERS_SCORE};
+                UserDatabase.USERS_SCORE,
+                UserDatabase.USERS_LOBBY};
 
         database = userdatabase.getReadableDatabase();
 
@@ -66,6 +68,7 @@ public class UserDAOSQLImpl implements UserDAO {
             temp.setName(cursor.getString(1));
             temp.setUserImageId(cursor.getInt(2));
             temp.setHighscore(cursor.getInt(3));
+            temp.setLobby(cursor.getString(4));
             result.add(temp);
             cursor.moveToNext();
         }
@@ -103,6 +106,7 @@ public class UserDAOSQLImpl implements UserDAO {
                 user.setName(cursor.getString(cursor.getColumnIndex(UserDatabase.USERS_NAME)));
                 user.setUserImageId(cursor.getInt(cursor.getColumnIndex(UserDatabase.USERS_DP)));
                 user.setHighscore(cursor.getInt(cursor.getColumnIndex(UserDatabase.USERS_SCORE)));
+                user.setLobby(cursor.getString(cursor.getColumnIndex(UserDatabase.USERS_LOBBY)));
                 cursor.moveToNext();
             }
 
@@ -134,6 +138,7 @@ public class UserDAOSQLImpl implements UserDAO {
         values.put(UserDatabase.USERS_NAME, user.getName());
         values.put(UserDatabase.USERS_DP, user.getUserImageId());
         values.put(UserDatabase.USERS_SCORE, user.getHighscore());
+        values.put(UserDatabase.USERS_LOBBY, user.getLobby());
 
         database = userdatabase.getWritableDatabase();
 

@@ -72,9 +72,9 @@ public class GameActivity extends AppCompatActivity{
         binding = ActivityGameBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        name = getIntent().getStringExtra("name");
-        dp = getIntent().getIntExtra("dp", 0);
-        lobby = (Lobby)getIntent().getSerializableExtra("lobby");
+        this.name = getIntent().getStringExtra("name");
+        this.dp = getIntent().getIntExtra("dp", 0);
+        this.lobby = (Lobby)getIntent().getSerializableExtra("lobby");
 
         counter = 90;
         score = 0;
@@ -130,7 +130,12 @@ public class GameActivity extends AppCompatActivity{
         canvas = new Canvas(bitmap);
         paint = new Paint();
 
+        canvas.drawColor(Color.WHITE);
+
         //change to next word
+        if (wordCount == 4)
+            binding.btnNext.setText("Finish");
+        
         binding.btnNext.setOnClickListener(view ->{
             saveDrawing();
         });
@@ -222,15 +227,15 @@ public class GameActivity extends AppCompatActivity{
     }
 
     private void saveDrawing(){
-        if(wordCount < 4) {
+        if(wordCount <= 4) {
             score += counter;
 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byte[] byteArray = stream.toByteArray();
 
-            Drawing newDrawing = new Drawing(lobby.getWords()[0], byteArray);
-            drawings.add(newDrawing);
+            Drawing newDrawing = new Drawing(lobby.getWords()[wordCount], byteArray);
+            this.drawings.add(newDrawing);
             canvas.drawColor(Color.WHITE);
             this.drawing_pad.clearCanvas();
             wordCount++;
@@ -245,8 +250,11 @@ public class GameActivity extends AppCompatActivity{
 
             //gotoSaveGame.putExtra("canvas", bitmap);
 
-            gotoSaveGame.putExtra("drawings", drawings);
+            gotoSaveGame.putExtra("drawings", this.drawings);
             gotoSaveGame.putExtra("score", score);
+            gotoSaveGame.putExtra("name", this.name);
+            gotoSaveGame.putExtra("dp", this.dp);
+            gotoSaveGame.putExtra("lobby", this.lobby.getName());
 //            Bitmap temp = bitmap;
 //
 //            ByteArrayOutputStream stream = new ByteArrayOutputStream();

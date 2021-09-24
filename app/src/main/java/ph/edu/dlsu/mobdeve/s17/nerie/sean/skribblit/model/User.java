@@ -6,12 +6,14 @@ public class User {
     private String name;
     private int id;
     private int highscore;
+    private String lobby;
 
-    public User(int userImageId, String name, int id, int highscore){
+    public User(int userImageId, String name, int id, int highscore, String lobby){
         this.userImageId = userImageId;
         this.name = name;
         this.id = id;
         this.highscore = highscore;
+        this.lobby = lobby;
     }
 
     public User(){
@@ -48,5 +50,13 @@ public class User {
 
     public void setHighscore(int highscore) {
         this.highscore = highscore;
+    }
+
+    public String getLobby() {
+        return lobby;
+    }
+
+    public void setLobby(String lobby) {
+        this.lobby = lobby;
     }
 }

@@ -16,13 +16,15 @@ public class UserDatabase extends SQLiteOpenHelper {
     public static final String USERS_NAME = "name";
     public static final String USERS_DP = "display_pic";
     public static final String USERS_SCORE = "high_score";
+    public static final String USERS_LOBBY = "lobby";
 
     public static final String CREATE_USER_TABLE =
             "create table " + TABLE_USERS + " ( "
                     + USERS_ID + " integer primary key, "
                     + USERS_NAME + " text, "
                     + USERS_DP + " integer, "
-                    + USERS_SCORE + " integer ); ";
+                    + USERS_SCORE + " integer, "
+                    + USERS_LOBBY + " text ); ";
 
     public UserDatabase(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
