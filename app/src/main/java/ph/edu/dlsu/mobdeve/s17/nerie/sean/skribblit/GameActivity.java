@@ -228,9 +228,10 @@ public class GameActivity extends AppCompatActivity{
     }
 
     private void saveDrawing(){
-        if(wordCount < 5) {
+        if(wordCount < 4) {
             Log.d("Counter", "score: " + score);
             score += counter;
+            Log.d("Counter", "score After: " + score);
 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
@@ -246,26 +247,22 @@ public class GameActivity extends AppCompatActivity{
             counter = 90;
             timer.start();
         } else{
-            Intent gotoSaveGame = new Intent(GameActivity.this, SaveGameActivity.class);
-            //gotoSaveGame.putExtra("name_key", "Hello");
-//            Drawing drawing = new Drawing();
+            score += counter;
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+            Drawing newDrawing = new Drawing(lobby.getWords()[wordCount], byteArray);
+            this.drawings.add(newDrawing);
 
-            //gotoSaveGame.putExtra("canvas", bitmap);
+            Intent gotoSaveGame = new Intent(GameActivity.this, SaveGameActivity.class);
 
             gotoSaveGame.putExtra("drawings", this.drawings);
             gotoSaveGame.putExtra("score", score);
             gotoSaveGame.putExtra("name", this.name);
             gotoSaveGame.putExtra("dp", this.dp);
             gotoSaveGame.putExtra("lobby", this.lobby.getName());
-//            Bitmap temp = bitmap;
-//
-//            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//            temp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-//            byte[] byteArray = stream.toByteArray();
-//
-//            gotoSaveGame.putExtra("canvas", byteArray);
-            startActivity(gotoSaveGame);
 
+            startActivity(gotoSaveGame);
             finish();
         }
     }
