@@ -56,8 +56,7 @@ public class ViewImageActivity extends AppCompatActivity {
         });
 
         binding.btnBack.setOnClickListener(view -> {
-            Intent backToSaveGame = new Intent(ViewImageActivity.this, SaveGameActivity.class);
-            startActivity(backToSaveGame);
+            this.finish();
         });
 
 

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,6 +59,8 @@ public class SaveGameAdapter extends RecyclerView.Adapter<SaveGameAdapter.SaveGa
     public void onBindViewHolder(SaveGameAdapter.SaveGameViewHolder holder, int position) {
         holder.tv_object_drawn.setText(drawingsArrayList.get(position).getName() + "");
         holder.iv_drawing.setImageBitmap(drawingsArrayList.get(position).getBitmap());
+        holder.iv_drawing.setMinimumHeight(200);
+        holder.iv_drawing.setMinimumWidth(200);
 
         holder.iv_drawing.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +82,8 @@ public class SaveGameAdapter extends RecyclerView.Adapter<SaveGameAdapter.SaveGa
     }
 
     protected class SaveGameViewHolder extends RecyclerView.ViewHolder {
+        LinearLayout ll_bubblein;
+        LinearLayout ll_bubbleout;
         TextView tv_object_drawn;
         ImageView iv_drawing;
 
@@ -87,6 +92,8 @@ public class SaveGameAdapter extends RecyclerView.Adapter<SaveGameAdapter.SaveGa
 
             tv_object_drawn = v.findViewById(R.id.tv_object_drawn);
             iv_drawing = v.findViewById(R.id.iv_drawing);
+            ll_bubblein = v.findViewById(R.id.ll_bubblein);
+            ll_bubbleout = v.findViewById(R.id.ll_bubbleout);
 
             iv_drawing.setOnClickListener(view -> {
                 Toast.makeText(context, "ITEM PRESSED", Toast.LENGTH_SHORT).show();
