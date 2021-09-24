@@ -1,8 +1,9 @@
 package ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Lobby {
+public class Lobby implements Serializable {
 
     private int id;
     private String name;
@@ -13,6 +14,7 @@ public class Lobby {
         this.id = id;
         this.name = name;
         this.words = words;
+        selected = false;
     }
 
     public int getId() {
