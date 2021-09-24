@@ -252,10 +252,10 @@
                 android:layout_gravity="center"/>
 
             <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/btn_brush"
+                android:id="@+id/btn_clear"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:background="@drawable/brush_selected"
+                android:background="@drawable/trashcan"
                 android:layout_marginLeft="10dp"
                 android:layout_gravity="center"/>
 
