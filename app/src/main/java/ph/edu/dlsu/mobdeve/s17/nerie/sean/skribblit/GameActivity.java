@@ -11,6 +11,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Pair;
@@ -177,18 +178,15 @@ public class GameActivity extends AppCompatActivity{
             currentWidth = this.drawing_pad.getCurrentWidth();
         });
 
-        binding.btnBrush.setOnClickListener(view -> {
-            canvas.drawColor(Color.WHITE);
-            this.drawing_pad.changeColor("white");
-            this.drawing_pad.changeStroke("thick");
-            binding.btnBrush.setBackgroundResource(R.drawable.brush_selected);
-        });
 
         binding.btnEraser.setOnClickListener(view -> {
             this.drawing_pad.changeStroke("thick");
             this.drawing_pad.changeColor("white");
             binding.btnEraser.setBackgroundResource(R.drawable.eraser_selected);
-            binding.btnBrush.setBackgroundResource(R.drawable.brush_notselected);
+        });
+
+        binding.btnClear.setOnClickListener(view -> {
+            //function here
         });
 
     }
@@ -197,7 +195,6 @@ public class GameActivity extends AppCompatActivity{
         this.drawing_pad.changeStroke(currentWidth);
         this.currentColor = this.drawing_pad.getCurrentColor();
         binding.btnEraser.setBackgroundResource(R.drawable.eraser_notselected);
-        binding.btnBrush.setBackgroundResource(R.drawable.brush_notselected);
     }
 
     private void init(){
