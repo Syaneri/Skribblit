@@ -26,6 +26,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.databinding.ActivityGameBinding;
@@ -127,7 +128,15 @@ public class GameActivity extends AppCompatActivity{
             //gotoSaveGame.putExtra("name_key", "Hello");
 //            Drawing drawing = new Drawing();
 
-            gotoSaveGame.putExtra("canvas", bitmap);
+            //gotoSaveGame.putExtra("canvas", bitmap);
+
+            Bitmap temp = bitmap;
+
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            temp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+
+            gotoSaveGame.putExtra("canvas", byteArray);
             startActivity(gotoSaveGame);
 
             finish();
@@ -228,7 +237,7 @@ public class GameActivity extends AppCompatActivity{
         this.drawing_pad.changeStroke(currentWidth);
         this.currentColor = this.drawing_pad.getCurrentColor();
         binding.btnEraser.setBackgroundResource(R.drawable.eraser_notselected);
-        binding.btnClear.setBackgroundResource(R.drawable.brush_notselected);
+        bindingk.btnClear.setBackgroundResource(R.drawable.brush_notselected);
     }
 
     private void init(){

@@ -57,16 +57,16 @@ public class SaveGameAdapter extends RecyclerView.Adapter<SaveGameAdapter.SaveGa
     @Override
     public void onBindViewHolder(SaveGameAdapter.SaveGameViewHolder holder, int position) {
         holder.tv_object_drawn.setText(drawingsArrayList.get(position).getName() + "");
+        holder.iv_drawing.setImageBitmap(drawingsArrayList.get(position).getBitmap());
 
         holder.iv_drawing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bitmap bitmap = Bitmap.createBitmap(holder.iv_drawing.getWidth(), holder.iv_drawing.getHeight(), Bitmap.Config.RGB_565);
-                bitmap.setHasAlpha(true);
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                byte[] byteArray = stream.toByteArray();
+                Bitmap temp = drawingsArrayList.get(position).getBitmap();
 
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                temp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
                 Intent viewImageIntent = new Intent(context, ViewImageActivity.class);
 
                 viewImageIntent.putExtra("img", byteArray);
