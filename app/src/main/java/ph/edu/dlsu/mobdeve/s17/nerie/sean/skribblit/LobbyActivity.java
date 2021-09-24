@@ -54,7 +54,7 @@ public class LobbyActivity extends AppCompatActivity {
             if (!lobbySelected) {
                 Toast toast = Toast.makeText(getApplicationContext(),
                         "No lobby selected",
-                        Toast.LENGTH_LONG);
+                        Toast.LENGTH_SHORT);
                 toast.show();
             }
         });

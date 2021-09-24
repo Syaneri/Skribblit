@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,8 +46,10 @@ public class LobbyAdapter extends RecyclerView.Adapter<LobbyAdapter.LobbyViewHol
             @Override
             public void onClick(View v) {
                 Log.d("DATA", "PRESSED");
-                holder.ll_lobby.setBackgroundResource(R.drawable.lobby_selected);
-//                holder.tv_lobbyname.setText("selected");
+                Toast toast = Toast.makeText(context,
+                        lobbyArrayList.get(position).getName() + " selected.",
+                        Toast.LENGTH_SHORT);
+                toast.show();
 
                 lobbyArrayList.get(position).setSelected(true);
                 for(Lobby lobby: lobbyArrayList){

@@ -5,23 +5,18 @@ import android.graphics.Bitmap;
 import java.io.Serializable;
 
 public class Drawing implements Serializable {
-
-    private int id;
     private String name;
     private Bitmap bitmap;
+    private byte[] byteArray;
 
-    public Drawing(int id, String name, Bitmap bitmap) {
-        this.id = id;
+    public Drawing(String name, Bitmap bitmap) {
         this.name = name;
         this.bitmap = bitmap;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public Drawing(String name, byte[] byteArray) {
+        this.name = name;
+        this.byteArray = byteArray;
     }
 
     public String getName() {
@@ -39,4 +34,6 @@ public class Drawing implements Serializable {
     public void setBitmap(Bitmap bitmap) {
         this.bitmap = bitmap;
     }
+
+    public byte[] getByteArray() { return byteArray; }
 }

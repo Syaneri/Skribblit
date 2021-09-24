@@ -36,15 +36,20 @@ import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.model.Lobby;
 public class GameActivity extends AppCompatActivity{
     private ActivityGameBinding binding;
 
+    private String name;
+    private Lobby lobby;
+    private int dp;
+
     private ImageView iv_canvas;
     private TextView tv_word;
     private TextView tv_timer;
     private int counter;
     private int score;
+    private int wordCount;
+    private CountDownTimer timer;
     private Button btn_palette;
 
     private TouchEventView drawing_pad;
-
 
     private Bitmap bitmap;
     private Canvas canvas;
@@ -59,6 +64,7 @@ public class GameActivity extends AppCompatActivity{
     private String currentWidth;
 
     private ArrayList<Pair<Path, Paint>> paths = new ArrayList<Pair<Path, Paint>>();
+    private ArrayList<Drawing> drawings = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,16 +72,18 @@ public class GameActivity extends AppCompatActivity{
         binding = ActivityGameBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        String name = getIntent().getStringExtra("name");
-        int dp = getIntent().getIntExtra("dp", 0);
-        Lobby lobby = (Lobby)getIntent().getSerializableExtra("lobby");
+        name = getIntent().getStringExtra("name");
+        dp = getIntent().getIntExtra("dp", 0);
+        lobby = (Lobby)getIntent().getSerializableExtra("lobby");
+
+        counter = 90;
+        score = 0;
+        wordCount = 0;
 
         iv_canvas = (ImageView) findViewById(R.id.iv_canvas);
         tv_word = (TextView) findViewById(R.id.tv_word);
         tv_timer = (TextView) findViewById(R.id.tv_timer);
-        tv_word.setText(lobby.getWords()[0]);
-        counter = 90;
-        score = 0;
+        tv_word.setText(lobby.getWords()[wordCount]);
 
         String str = tv_word.getText().toString();
 
@@ -105,7 +113,7 @@ public class GameActivity extends AppCompatActivity{
                 (height),
                 Bitmap.Config.ARGB_8888);
 
-        new CountDownTimer(90000,1000) {
+        timer = new CountDownTimer(90000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 tv_timer.setText(String.valueOf(counter));
@@ -113,7 +121,7 @@ public class GameActivity extends AppCompatActivity{
             }
             @Override
             public void onFinish() {
-                score += counter;
+                 saveDrawing();
             }
         }.start();
 
@@ -124,22 +132,7 @@ public class GameActivity extends AppCompatActivity{
 
         //change to next word
         binding.btnNext.setOnClickListener(view ->{
-            Intent gotoSaveGame = new Intent(GameActivity.this, SaveGameActivity.class);
-            //gotoSaveGame.putExtra("name_key", "Hello");
-//            Drawing drawing = new Drawing();
-
-            //gotoSaveGame.putExtra("canvas", bitmap);
-
-            Bitmap temp = bitmap;
-
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            temp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte[] byteArray = stream.toByteArray();
-
-            gotoSaveGame.putExtra("canvas", byteArray);
-            startActivity(gotoSaveGame);
-
-            finish();
+            saveDrawing();
         });
 
         //change colors
@@ -217,10 +210,7 @@ public class GameActivity extends AppCompatActivity{
 
         binding.btnClear.setOnClickListener(view -> {
             canvas.drawColor(Color.WHITE);
-            this.drawing_pad.changeColor("white");
-            this.drawing_pad.changeStroke("thick");
             this.drawing_pad.clearCanvas();
-            binding.btnClear.setBackgroundResource(R.drawable.brush_selected);
             binding.btnEraser.setBackgroundResource(R.drawable.eraser_notselected);
         });
 
@@ -228,16 +218,51 @@ public class GameActivity extends AppCompatActivity{
             this.drawing_pad.changeStroke("thick");
             this.drawing_pad.changeColor("white");
             binding.btnEraser.setBackgroundResource(R.drawable.eraser_selected);
-            binding.btnClear.setBackgroundResource(R.drawable.brush_notselected);
         });
+    }
 
+    private void saveDrawing(){
+        if(wordCount < 4) {
+            score += counter;
+
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+
+            Drawing newDrawing = new Drawing(lobby.getWords()[0], byteArray);
+            drawings.add(newDrawing);
+            canvas.drawColor(Color.WHITE);
+            this.drawing_pad.clearCanvas();
+            wordCount++;
+            tv_word.setText(lobby.getWords()[wordCount]);
+            timer.cancel();
+            counter = 90;
+            timer.start();
+        } else{
+            Intent gotoSaveGame = new Intent(GameActivity.this, SaveGameActivity.class);
+            //gotoSaveGame.putExtra("name_key", "Hello");
+//            Drawing drawing = new Drawing();
+
+            //gotoSaveGame.putExtra("canvas", bitmap);
+
+            gotoSaveGame.putExtra("drawings", drawings);
+//            Bitmap temp = bitmap;
+//
+//            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//            temp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+//            byte[] byteArray = stream.toByteArray();
+//
+//            gotoSaveGame.putExtra("canvas", byteArray);
+            startActivity(gotoSaveGame);
+
+            finish();
+        }
     }
 
     private void colorSelected(){
         this.drawing_pad.changeStroke(currentWidth);
         this.currentColor = this.drawing_pad.getCurrentColor();
         binding.btnEraser.setBackgroundResource(R.drawable.eraser_notselected);
-        bindingk.btnClear.setBackgroundResource(R.drawable.brush_notselected);
     }
 
     private void init(){
