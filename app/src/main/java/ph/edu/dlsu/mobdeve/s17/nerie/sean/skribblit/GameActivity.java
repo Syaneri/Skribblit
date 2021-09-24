@@ -30,6 +30,7 @@ import java.util.ArrayList;
 
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.databinding.ActivityGameBinding;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.model.Drawing;
+import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.model.Lobby;
 
 public class GameActivity extends AppCompatActivity{
     private ActivityGameBinding binding;
@@ -64,10 +65,14 @@ public class GameActivity extends AppCompatActivity{
         binding = ActivityGameBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        String name = getIntent().getStringExtra("name");
+        int dp = getIntent().getIntExtra("dp", 0);
+        Lobby lobby = (Lobby)getIntent().getSerializableExtra("lobby");
 
         iv_canvas = (ImageView) findViewById(R.id.iv_canvas);
         tv_word = (TextView) findViewById(R.id.tv_word);
         tv_timer = (TextView) findViewById(R.id.tv_timer);
+        tv_word.setText(lobby.getWords()[0]);
         counter = 90;
         score = 0;
 
@@ -201,12 +206,12 @@ public class GameActivity extends AppCompatActivity{
             currentWidth = this.drawing_pad.getCurrentWidth();
         });
 
-        binding.btnBrush.setOnClickListener(view -> {
+        binding.btnClear.setOnClickListener(view -> {
             canvas.drawColor(Color.WHITE);
             this.drawing_pad.changeColor("white");
             this.drawing_pad.changeStroke("thick");
             this.drawing_pad.clearCanvas();
-            binding.btnBrush.setBackgroundResource(R.drawable.brush_selected);
+            binding.btnClear.setBackgroundResource(R.drawable.brush_selected);
             binding.btnEraser.setBackgroundResource(R.drawable.eraser_notselected);
         });
 
@@ -214,7 +219,7 @@ public class GameActivity extends AppCompatActivity{
             this.drawing_pad.changeStroke("thick");
             this.drawing_pad.changeColor("white");
             binding.btnEraser.setBackgroundResource(R.drawable.eraser_selected);
-            binding.btnBrush.setBackgroundResource(R.drawable.brush_notselected);
+            binding.btnClear.setBackgroundResource(R.drawable.brush_notselected);
         });
 
     }
@@ -223,7 +228,7 @@ public class GameActivity extends AppCompatActivity{
         this.drawing_pad.changeStroke(currentWidth);
         this.currentColor = this.drawing_pad.getCurrentColor();
         binding.btnEraser.setBackgroundResource(R.drawable.eraser_notselected);
-        binding.btnBrush.setBackgroundResource(R.drawable.brush_notselected);
+        binding.btnClear.setBackgroundResource(R.drawable.brush_notselected);
     }
 
     private void init(){

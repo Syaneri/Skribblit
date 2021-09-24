@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,7 @@ public class LobbyActivity extends AppCompatActivity {
 
     private LobbyAdapter lobbyAdapter;
     private ActivityLobbyBinding binding;
+    private boolean lobbySelected;
 
     ArrayList<Lobby> lobbyList;
 
@@ -26,16 +28,35 @@ public class LobbyActivity extends AppCompatActivity {
         binding = ActivityLobbyBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        Intent intent = new Intent();
+        String name = intent.getStringExtra("name");
+        int dp = intent.getIntExtra("dp", 0);
+
         lobbyList = populateLobby();
+        lobbySelected = false;
         lobbyAdapter = new LobbyAdapter(getApplicationContext(), lobbyList);
 
         binding.rvLobbyList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         binding.rvLobbyList.setAdapter(lobbyAdapter);
 
         binding.btnLobbyStart.setOnClickListener(view -> {
-            Intent gameStart = new Intent(LobbyActivity.this, GameActivity.class);
-            startActivity(gameStart);
-            finish();
+            for(Lobby lobby: lobbyList){
+                if(lobby.isSelected()){
+                    lobbySelected = true;
+                    Intent gameStart = new Intent(LobbyActivity.this, GameActivity.class);
+                    gameStart.putExtra("name", name);
+                    gameStart.putExtra("dp", dp);
+                    gameStart.putExtra("lobby", lobby);
+                    startActivity(gameStart);
+                    finish();
+                }
+            }
+            if (!lobbySelected) {
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "No lobby selected",
+                        Toast.LENGTH_LONG);
+                toast.show();
+            }
         });
 
         binding.btnLobbyExit.setOnClickListener(view -> {
@@ -46,8 +67,8 @@ public class LobbyActivity extends AppCompatActivity {
     //temporary data
     private ArrayList<Lobby> populateLobby(){
         ArrayList<Lobby> lobbyList = new ArrayList<>();
-        String[] words1 = {"dog", "cat", "lion", "tiger", "crocodile", "shark", "whale", "snake", "bear", "wolf"};
-        String[] words2 = {"chair", "sofa", "table", "wardrobe", "bed", "coffee table", "recliner", "ottoman", "cupboard", "armchair", "cabinet"};
+        String[] words1 = {"dog", "cat", "tiger", "crocodile", "shark"};
+        String[] words2 = {"chair", "sofa", "table", "wardrobe", "bed"};
 
         lobbyList.add(new Lobby(
            1234,
