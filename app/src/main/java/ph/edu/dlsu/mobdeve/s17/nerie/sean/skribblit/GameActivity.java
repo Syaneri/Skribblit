@@ -15,6 +15,7 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.Pair;
 import android.view.Display;
 import android.view.MotionEvent;
@@ -135,7 +136,7 @@ public class GameActivity extends AppCompatActivity{
         //change to next word
         if (wordCount == 4)
             binding.btnNext.setText("Finish");
-        
+
         binding.btnNext.setOnClickListener(view ->{
             saveDrawing();
         });
@@ -227,7 +228,8 @@ public class GameActivity extends AppCompatActivity{
     }
 
     private void saveDrawing(){
-        if(wordCount <= 4) {
+        if(wordCount < 5) {
+            Log.d("Counter", "score: " + score);
             score += counter;
 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
