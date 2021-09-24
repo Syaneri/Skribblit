@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity{
             R.drawable.mark_face_hehe, R.drawable.mark_face_jito, R.drawable.mark_face_laugh,
             R.drawable.mark_face_smile, R.drawable.mark_face_tere};
     ImageView userImage;
-    int i = 0;
+    int i = 0, dp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +29,17 @@ public class MainActivity extends AppCompatActivity{
 
         binding.btnEnter.setOnClickListener(view -> {
             Intent gotoLobby = new Intent(MainActivity.this, LobbyActivity.class);
+
+            gotoLobby.putExtra("name", binding.etName.getText().toString());
+            gotoLobby.putExtra("dp", this.dp);
+
             startActivity(gotoLobby);
         });
 
         binding.btnSwitchPic.setOnClickListener(view -> {
             userImage.setImageResource(images[i]);
+            this.dp = images[i];
+
             i++;
             if (i == 8)
                 i = 0;
