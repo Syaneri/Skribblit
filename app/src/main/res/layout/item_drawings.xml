@@ -9,8 +9,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp">
         <LinearLayout
+            android:id="@+id/ll_bubblein"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/chatbubble_in"
@@ -25,7 +30,7 @@
                 android:text="Robot"
                 android:textColor="@color/black"
                 android:layout_marginLeft="15dp"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 />
         </LinearLayout>
 
@@ -33,24 +38,26 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_gravity="right"
-            android:layout_marginLeft="200dp">
+            android:layout_gravity="right">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
             <LinearLayout
+                android:id="@+id/ll_bubbleout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/chatbubble_out"
-                android:padding="10dp">
+                android:padding="10dp"
+                android:layout_gravity="right">
 
                 <ImageView
                     android:id="@+id/iv_drawing"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="25sp"
-                    android:text="User"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:textColor="@color/white"
                     android:layout_marginRight="15dp"
-                    android:textStyle="bold"
-                    android:src="@drawable/crycry2"
                     android:clickable="true"
                     android:onClick="imageClick"
                     android:scaleType="fitCenter"

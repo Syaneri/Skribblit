@@ -34,6 +34,18 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="20dp"
             />
+        <TextView
+            android:id="@+id/user_score"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Score: "
+            android:textSize="20dp"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="5dp"
+            />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_drawingList"
