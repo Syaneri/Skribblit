@@ -52,17 +52,6 @@ public class PostGameActivity extends AppCompatActivity {
 //        binding.rvPlayerList.setAdapter(userAdapter);
 
         initDAO();
-
-        binding.btnNewGame.setOnClickListener(view -> {
-            Intent gameStart = new Intent(PostGameActivity.this, MainActivity.class);
-            startActivity(gameStart);
-            finish();
-        });
-
-        binding.btnExitGame.setOnClickListener(view -> {
-            finishAndRemoveTask();
-        });
-
     }
 
     private void initDAO(){
@@ -87,6 +76,18 @@ public class PostGameActivity extends AppCompatActivity {
         binding.rvPlayerList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         binding.rvPlayerList.setAdapter(userAdapter);
+
+        binding.btnNewGame.setOnClickListener(view -> {
+            Intent gameStart = new Intent(PostGameActivity.this, MainActivity.class);
+            startActivity(gameStart);
+            finish();
+        });
+
+        binding.btnExitGame.setOnClickListener(view -> {
+            finishAndRemoveTask();
+        });
+
+
 
         //save user using intent
     }
@@ -116,15 +117,15 @@ public class PostGameActivity extends AppCompatActivity {
 //        user.setHighscore(1250);
 //
 //        userDAO.addUser(user);
-
+//
 //        user.setId(2);
 //        user.setName("Robi");
 //        user.setUserImageId(R.drawable.mark_face_cry);
 //        user.setHighscore(1231);
 //
 //        userDAO.addUser(user);
-
-
+//
+//
 //        userList.add(new User(
 //                R.drawable.mark_face_laugh,
 //                "Sean",
