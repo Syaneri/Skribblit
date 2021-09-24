@@ -22,7 +22,7 @@
             android:id="@+id/tv_player_turn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Player's Turn"
+            android:text=""
             android:textStyle="bold"
             android:textSize="25dp"
             android:textColor="@color/black"
@@ -38,15 +38,15 @@
             android:textSize="25dp"
             android:textColor="@color/black"
             android:gravity="right"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
+            android:layout_marginRight="10dp"
             android:layout_gravity="center"/>
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/timer"
-            android:layout_gravity="center"
-            android:layout_weight="1"/>
+            android:layout_gravity="center" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/canvas_panel"
