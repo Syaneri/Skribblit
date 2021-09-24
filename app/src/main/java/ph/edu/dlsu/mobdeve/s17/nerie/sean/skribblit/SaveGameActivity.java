@@ -1,6 +1,8 @@
 package ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +17,8 @@ import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.databinding.ActivitySaveGame
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.model.Drawing;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.model.User;
 
+import static android.graphics.BitmapFactory.decodeByteArray;
+
 public class SaveGameActivity extends AppCompatActivity {
     private ActivitySaveGameBinding binding;
     private ArrayList<Drawing> drawingList;
@@ -26,10 +30,10 @@ public class SaveGameActivity extends AppCompatActivity {
         binding = ActivitySaveGameBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        Intent intent = new Intent();
-        String str = intent.getStringExtra("name_key");
+        byte[] byteArray = getIntent().getByteArrayExtra("canvas");
+        Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
 
-        drawingList = populateDrawings("Robot");
+        drawingList = populateDrawings("Robot", bmp);
 
         saveGameAdapter = new SaveGameAdapter(getApplicationContext(), drawingList);
 
@@ -57,12 +61,13 @@ public class SaveGameActivity extends AppCompatActivity {
     }
 
     //temporary data
-    private ArrayList<Drawing> populateDrawings(String str){
+    private ArrayList<Drawing> populateDrawings(String str, Bitmap bmp){
         ArrayList<Drawing> drawingList = new ArrayList<>();
 
         drawingList.add(new Drawing(
                 1234,
-                str
+                str,
+                bmp
         ));
 
         return drawingList;
