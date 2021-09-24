@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.service.autofill.UserData;
 
 import java.util.ArrayList;
 
@@ -118,6 +119,11 @@ public class UserDAOSQLImpl implements UserDAO {
         }
         return user;
 
+    }
+
+    @Override
+    public int getSize(){
+        return this.getUsers().size();
     }
 
     @Override

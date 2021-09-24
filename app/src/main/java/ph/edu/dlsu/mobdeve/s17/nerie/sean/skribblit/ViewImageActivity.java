@@ -2,6 +2,8 @@ package ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +22,13 @@ public class ViewImageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityViewImageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        Intent intent = getIntent();
+
+        byte[] byteArray = intent.getByteArrayExtra("img");
+        Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+
+        binding.ivDisplayDrawing.setImageBitmap(bmp);
 
         binding.btnSaveImage.setOnClickListener(view ->{
 //            Uri imageFileUri = getContentResolver().

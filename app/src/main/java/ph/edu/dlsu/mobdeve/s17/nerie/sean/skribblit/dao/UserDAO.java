@@ -9,6 +9,7 @@ public interface UserDAO {
     long addUser(User user);
     ArrayList<User> getUsers();
     User getUser(int userid);
+    int getSize();
     int updateUser(User user);
     int deleteUser(int userid);
 

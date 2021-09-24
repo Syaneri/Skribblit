@@ -2,6 +2,7 @@ package ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,7 +14,10 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.GameActivity;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.LobbyActivity;
@@ -23,6 +27,7 @@ import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.SaveGameActivity;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.ViewImageActivity;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.databinding.ActivityPostGameBinding;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.model.Drawing;
+import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.model.User;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
@@ -34,6 +39,7 @@ public class SaveGameAdapter extends RecyclerView.Adapter<SaveGameAdapter.SaveGa
     public SaveGameAdapter(Context context, ArrayList<Drawing> drawingsArrayList){
         this.drawingsArrayList = drawingsArrayList;
         this.context = context;
+
     }
 
     @Override
@@ -55,8 +61,17 @@ public class SaveGameAdapter extends RecyclerView.Adapter<SaveGameAdapter.SaveGa
         holder.iv_drawing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent viewImageIntent = new Intent(context, GameActivity.class);
-                Log.d("SAVEGAMEADAPTER", "Change View");
+                Bitmap bitmap = Bitmap.createBitmap(holder.iv_drawing.getWidth(), holder.iv_drawing.getHeight(), Bitmap.Config.RGB_565);
+                bitmap.setHasAlpha(true);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+
+                Intent viewImageIntent = new Intent(context, ViewImageActivity.class);
+
+                viewImageIntent.putExtra("img", byteArray);
+                viewImageIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
                 context.startActivity(viewImageIntent);
             }
         });
