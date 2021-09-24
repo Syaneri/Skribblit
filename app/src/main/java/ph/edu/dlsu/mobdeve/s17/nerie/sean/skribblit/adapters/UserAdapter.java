@@ -9,12 +9,9 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.R;
-import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.model.Lobby;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.model.User;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder>{

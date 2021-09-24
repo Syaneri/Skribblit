@@ -5,19 +5,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.adapters.LobbyAdapter;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.adapters.UserAdapter;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.dao.UserDAO;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.dao.UserDAOSQLImpl;
-import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.databinding.ActivityLobbyBinding;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.databinding.ActivityPostGameBinding;
-import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.model.Lobby;
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.model.User;
 
 public class PostGameActivity extends AppCompatActivity {
@@ -26,11 +22,26 @@ public class PostGameActivity extends AppCompatActivity {
     private ArrayList<User> userArrayList;
     private UserAdapter userAdapter;
 
+    private String name;
+    private String lobby;
+    private int dp;
+    private int score;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityPostGameBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        Intent intent = new Intent();
+
+        this.name = intent.getStringExtra("name");
+        this.lobby = intent.getStringExtra("lobby");
+        this.dp = intent.getIntExtra("dp", 0);
+        this.score = intent.getIntExtra("score", 0);
+
+        //create user
+        saveUser(this.name, this.dp, this.score, this.lobby);
 
 //        populateUser();
 
@@ -49,8 +60,7 @@ public class PostGameActivity extends AppCompatActivity {
         });
 
         binding.btnExitGame.setOnClickListener(view -> {
-            finish();
-            System.exit(0);
+            finishAndRemoveTask();
         });
 
     }
@@ -81,18 +91,31 @@ public class PostGameActivity extends AppCompatActivity {
         //save user using intent
     }
 
-    private void populateUser() {
-//        ArrayList<User> userList = new ArrayList<>();
+    private void saveUser(String name, int imageId, int highscore, String lobby){
         User user = new User();
 
         UserDAO userDAO = new UserDAOSQLImpl(getApplicationContext());
 
-        user.setId(3);
-        user.setName("Sean");
-        user.setUserImageId(R.drawable.mark_face_hehe);
-        user.setHighscore(1250);
-
+        user.setId(userDAO.getSize() + 1);
+        user.setName(name);
+        user.setUserImageId(imageId);
+        user.setHighscore(highscore);
+        user.setLobby(lobby);
         userDAO.addUser(user);
+    }
+
+//    private void populateUser() {
+//        ArrayList<User> userList = new ArrayList<>();
+//        User user = new User();
+//
+//        UserDAO userDAO = new UserDAOSQLImpl(getApplicationContext());
+//
+//        user.setId(3);
+//        user.setName("Sean");
+//        user.setUserImageId(R.drawable.mark_face_hehe);
+//        user.setHighscore(1250);
+//
+//        userDAO.addUser(user);
 
 //        user.setId(2);
 //        user.setName("Robi");
@@ -121,5 +144,5 @@ public class PostGameActivity extends AppCompatActivity {
 //        this.userArrayList = userList;
 //
 //        return userList;
-    }
+//    }
 }

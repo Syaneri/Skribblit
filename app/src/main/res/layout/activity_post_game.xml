@@ -51,7 +51,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_playerList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="250dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_Code"
@@ -59,6 +59,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
             android:layout_marginTop="20dp"
+            android:scrollbars="vertical"
             />
 
         <androidx.appcompat.widget.AppCompatButton

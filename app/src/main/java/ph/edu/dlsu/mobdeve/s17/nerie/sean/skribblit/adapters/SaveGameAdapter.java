@@ -3,6 +3,7 @@ package ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,18 +59,19 @@ public class SaveGameAdapter extends RecyclerView.Adapter<SaveGameAdapter.SaveGa
     @Override
     public void onBindViewHolder(SaveGameAdapter.SaveGameViewHolder holder, int position) {
         holder.tv_object_drawn.setText(drawingsArrayList.get(position).getName() + "");
-        holder.iv_drawing.setImageBitmap(drawingsArrayList.get(position).getBitmap());
-        holder.iv_drawing.setMinimumHeight(200);
-        holder.iv_drawing.setMinimumWidth(200);
+
+        byte[] byteArray = drawingsArrayList.get(position).getByteArray();
+        Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+
+        holder.iv_drawing.setImageBitmap(bmp);
 
         holder.iv_drawing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bitmap temp = drawingsArrayList.get(position).getBitmap();
-
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                temp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
+
                 Intent viewImageIntent = new Intent(context, ViewImageActivity.class);
 
                 viewImageIntent.putExtra("img", byteArray);
