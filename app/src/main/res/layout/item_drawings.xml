@@ -53,6 +53,7 @@
                     android:src="@drawable/crycry2"
                     android:clickable="true"
                     android:onClick="imageClick"
+                    android:scaleType="fitCenter"
                     />
             </LinearLayout>
         </LinearLayout>
