@@ -1,6 +1,8 @@
 package ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.model;
 
-public class Drawing {
+import java.io.Serializable;
+
+public class Drawing implements Serializable {
 
     private int id;
     private String name;

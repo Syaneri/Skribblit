@@ -64,11 +64,6 @@ public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView
         currentWidth = "normal";
     }
 
-    public Bitmap save() {
-        return nBitmap;
-    }
-
-
     private class GestureListener extends GestureDetector.SimpleOnGestureListener {
         // event when double tap occurs
         @Override
@@ -199,6 +194,10 @@ public class TouchEventView extends androidx.appcompat.widget.AppCompatImageView
                 paint.setStrokeWidth(30);
         }
     }
+
+    public void clearCanvas(){ paths.clear(); }
+
+    public Bitmap save() { return nBitmap; }
 
     public String getCurrentColor() { return currentColor; }
 

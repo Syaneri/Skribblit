@@ -12,6 +12,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
 import android.util.Pair;
 import android.view.Display;
@@ -27,12 +28,16 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.databinding.ActivityGameBinding;
+import ph.edu.dlsu.mobdeve.s17.nerie.sean.skribblit.model.Drawing;
 
 public class GameActivity extends AppCompatActivity{
     private ActivityGameBinding binding;
 
     private ImageView iv_canvas;
     private TextView tv_word;
+    private TextView tv_timer;
+    private int counter;
+    private int score;
     private Button btn_palette;
 
     private TouchEventView drawing_pad;
@@ -61,6 +66,9 @@ public class GameActivity extends AppCompatActivity{
 
         iv_canvas = (ImageView) findViewById(R.id.iv_canvas);
         tv_word = (TextView) findViewById(R.id.tv_word);
+        tv_timer = (TextView) findViewById(R.id.tv_timer);
+        counter = 90;
+        score = 0;
 
         String str = tv_word.getText().toString();
 
@@ -90,6 +98,18 @@ public class GameActivity extends AppCompatActivity{
                 (height),
                 Bitmap.Config.ARGB_8888);
 
+        new CountDownTimer(90000,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                tv_timer.setText(String.valueOf(counter));
+                counter--;
+            }
+            @Override
+            public void onFinish() {
+                score += counter;
+            }
+        }.start();
+
         init();
 
         canvas = new Canvas(bitmap);
@@ -99,6 +119,9 @@ public class GameActivity extends AppCompatActivity{
         binding.btnNext.setOnClickListener(view ->{
             Intent gotoSaveGame = new Intent(GameActivity.this, SaveGameActivity.class);
             //gotoSaveGame.putExtra("name_key", "Hello");
+//            Drawing drawing = new Drawing();
+
+            gotoSaveGame.putExtra("canvas", bitmap);
             startActivity(gotoSaveGame);
 
             finish();
@@ -181,7 +204,9 @@ public class GameActivity extends AppCompatActivity{
             canvas.drawColor(Color.WHITE);
             this.drawing_pad.changeColor("white");
             this.drawing_pad.changeStroke("thick");
+            this.drawing_pad.clearCanvas();
             binding.btnBrush.setBackgroundResource(R.drawable.brush_selected);
+            binding.btnEraser.setBackgroundResource(R.drawable.eraser_notselected);
         });
 
         binding.btnEraser.setOnClickListener(view -> {
